@@ -1,0 +1,76 @@
+/* 基礎重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 全站基調 */
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #e9e9e9;   /* 淺灰底 */
+  color: #222;
+  line-height: 1.8;
+}
+
+/* 區塊通用 */
+section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* 作品識別 */
+.identity {
+  text-align: center;
+}
+
+.title-main {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.title-sub {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: #777;
+}
+
+/* 章節標題 */
+h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* 入口按鈕 */
+.enter {
+  text-align: center;
+}
+
+.enter-link {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  transition: opacity 0.3s ease;
+}
+
+.enter-link:hover {
+  opacity: 0.6;
+}
+
+/* 基本資訊 */
+.info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
