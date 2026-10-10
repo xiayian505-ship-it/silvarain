@@ -1,0 +1,28 @@
+/* ==========================================================
+   鹿雨森卡牌 Demo｜功能層
+   此檔只放宿主為卡牌戰鬥所需的佈局、可用性和結構調整。
+   卡牌流程與內部基礎樣式由軍火庫 SlowlyCardBattle 提供。
+========================================================== */
+.card-main { width: min(1160px, calc(100% - 48px)); }
+.card-stage, .card-stage-inner, #battle { min-width: 0; }
+.card-topline { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.card-stage { position: relative; }
+.card-stage-inner { position: relative; isolation: isolate; }
+.card-stage-inner > #battle { position: relative; z-index: 1; }
+.card-action { min-height: 44px; cursor: pointer; }
+.card-guide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card-guide > div { min-width: 0; }
+.card-error { padding: 18px; margin: 16px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.card-error[hidden] { display: none; }
+/* Component 自帶 container query，這裡不重做卡牌引擎的手機佈局。 */
+#battle .slowly-card-battle { min-width: 0; }
+#battle .scb-hand { scrollbar-width: thin; }
+/* 讓手機縱向資源列依內容高度排列，避免軍火庫預設 16rem flex-basis 留白。 */
+#battle .scb-energy-block { flex-basis: auto; }
+#battle .scb-card { touch-action: manipulation; }
+@media (max-width: 690px) {
+  .card-main { width: calc(100% - 30px); }
+  .card-guide { grid-template-columns: 1fr; gap: 10px; }
+  .card-topline { align-items: stretch; }
+  .card-topline .card-action { width: 100%; }
+}

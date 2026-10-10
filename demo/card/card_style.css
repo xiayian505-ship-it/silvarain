@@ -1,0 +1,179 @@
+/* ==========================================================
+   鹿雨森卡牌 Demo｜外觀層
+   只掌控本專案的色彩、氛圍、卡牌外框與動畫。
+   由軍火庫提供 Card Battle 結構 CSS，這裡不複製元件原始碼。
+========================================================== */
+:root {
+  --card-ink: #e9f8ef;
+  --card-muted: #a7c3b6;
+  --card-edge: rgba(190,236,216,.29);
+  --card-glow: #b5e9d3;
+  --card-deep: #071719;
+}
+body { background: #081617; }
+/* 沿用官網場景，卡牌頁略微壓暗背景以讓牌面清晰。 */
+.scenery { background: radial-gradient(ellipse at 50% 25%, rgba(122,173,155,.21), transparent 65%),linear-gradient(#0c2324,#122c2a 60%,#061214); }
+.scenery .atmosphere { background: linear-gradient(180deg,rgba(4,14,17,.38),rgba(5,14,17,.70)),radial-gradient(ellipse at 50% 25%,transparent,rgba(1,8,10,.53)); }
+#fireflies { position:absolute;inset:0;z-index:2;pointer-events:none; }
+#weather { opacity:.46; }
+.site-header { backdrop-filter:blur(14px); }
+.card-main { padding-top:72px;padding-bottom:86px; }
+.card-main .demo-breadcrumb { margin-bottom:34px; }
+.card-intro { display:flex;align-items:center;justify-content:space-between;gap:30px;min-height:255px;padding:0 10px 40px; }
+.card-intro-text { position:relative;z-index:1;max-width:730px; }
+.card-intro .section-label { margin:0 0 12px;color:#b7dcca;font-size:12px;letter-spacing:.30em; }
+.card-intro h1 { margin:0;color:#f0fff5;font-size:clamp(42px,6vw,77px);font-weight:400;letter-spacing:.24em;line-height:1.3;text-shadow:0 0 26px rgba(187,241,216,.1); }
+.card-intro h1 span { color:#bfead6; }
+.card-subtitle { margin:10px 0 0!important;color:#a9d1c1;font:italic clamp(19px,2.2vw,26px) "Cormorant Garamond",Georgia,serif;letter-spacing:.22em; }
+.card-intro .fine-rule { width:min(380px,90%);margin:21px 0 17px; }
+.card-lead { color:#c3dcd0;font-size:14px;letter-spacing:.08em;line-height:2.15; }
+.card-intro-sigil { position:relative;flex:none;display:grid;place-items:center;width:215px;height:215px;filter:drop-shadow(0 0 30px rgba(174,233,211,.14)); }
+.sigil-orbit { position:absolute;inset:23px;border:1px solid rgba(199,245,223,.4);border-radius:50%;box-shadow:inset 0 0 22px rgba(139,208,185,.1); }
+.orbit-one { transform:rotate(-25deg) scaleX(.78); }
+.orbit-two { inset:7px;border-style:dotted;opacity:.4;transform:rotate(34deg) scaleX(.85); }
+.sigil-center { font-size:102px;font-weight:100;color:#d8ffec;line-height:1;text-shadow:0 0 20px rgba(178,253,216,.35);animation:card-breathe 5s ease-in-out infinite; }
+.sigil-caption { position:absolute;bottom:11px;color:#b7dcca;font:italic 12px "Cormorant Garamond",Georgia,serif;letter-spacing:.42em; }
+@keyframes card-breathe { 0%,100% { opacity:.65;transform:scale(.94); } 50% { opacity:1;transform:scale(1.035); } }
+.card-topline { margin:5px 0 22px; }
+.card-mode { display:flex;align-items:center;gap:11px;flex-wrap:wrap;color:#d4eadf;font-size:13px;letter-spacing:.13em; }
+.card-mode small { color:#8fb5a4;font-size:11px;letter-spacing:.05em; }
+.card-status-dot { width:7px;height:7px;border-radius:50%;background:#a7e6cd;box-shadow:0 0 12px #9bf5c7; }
+.card-action { padding:11px 22px;border:1px solid rgba(166,223,196,.45);background:rgba(12,36,34,.82);color:#eafaf1;font:inherit;font-size:13px;letter-spacing:.08em;transition:background .2s,border-color .2s; }
+.card-action:hover { background:rgba(31,78,66,.88);border-color:#c8f5db; }
+.card-action:focus-visible { outline:2px solid #c3f4e0;outline-offset:3px; }
+.card-stage { border:1px solid rgba(184,225,204,.29);background:linear-gradient(148deg,rgba(9,30,32,.90),rgba(6,20,24,.94) 65%,rgba(18,38,34,.92));box-shadow:0 16px 60px rgba(0,0,0,.22), inset 0 0 30px rgba(162,224,195,.045); }
+.card-stage::before,.card-stage::after { content:"";position:absolute;width:20px;height:20px;pointer-events:none;border-color:#b1dcc7;opacity:.75; }
+.card-stage::before { top:-1px;left:-1px;border-top:1px solid;border-left:1px solid; }
+.card-stage::after { right:-1px;bottom:-1px;border-right:1px solid;border-bottom:1px solid; }
+.card-stage-heading { padding:21px 26px 17px;border-bottom:1px solid rgba(197,237,219,.13);background:rgba(15,50,47,.31); }
+.card-stage-index { color:#b5dcc9;font:italic 17px "Cormorant Garamond",Georgia,serif;letter-spacing:.18em; }
+.card-stage-heading h2 { display:inline-block;margin:0 17px 0;color:#ecfff5;font-size:19px;font-weight:500;letter-spacing:.15em; }
+.card-stage-heading p { display:inline-block;margin:0;color:#a5c5b7;font-size:12px;letter-spacing:.09em; }
+.card-stage-inner { padding:18px 26px 20px; }
+.card-ornament { color:rgba(180,227,204,.49);font-family:Georgia,serif;letter-spacing:.27em;text-align:center; }
+.card-ornament.top { margin:0 0 15px;font-size:10px; }
+.card-ornament.bottom { margin:19px 0 0;font-size:10px; }
+/* ===== 軍火庫 Card Battle 掛載後的鹿雨森皮膚 ===== */
+#battle .slowly-card-battle {
+  --scb-gap: 1.15rem;
+  --scb-border: rgba(184,235,210,.26);
+  --scb-muted: #a9c7b9;
+  --scb-surface: transparent;
+  --scb-meter-track: rgba(173,218,199,.12);
+  --scb-hp: #a3dcca;
+  --scb-energy: #d8d4a2;
+  --scb-card-bg: rgba(13,42,39,.84);
+  --scb-card-text: #f1fff7;
+  font-family:"Noto Serif TC","Songti TC",serif;
+}
+#battle .scb-arena { gap:15px; }
+#battle .scb-combatant { position:relative;overflow:hidden;padding:17px 18px 18px;border:1px solid rgba(181,222,204,.25);background:radial-gradient(ellipse at 50% 36%,rgba(126,208,180,.08),transparent 60%),linear-gradient(155deg,rgba(14,47,44,.65),rgba(9,28,30,.70)); }
+#battle .scb-enemy-panel { background:radial-gradient(ellipse at 50% 36%,rgba(181,148,202,.1),transparent 60%),linear-gradient(155deg,rgba(32,36,48,.60),rgba(10,24,32,.7)); }
+#battle .scb-combatant::after { content:"";position:absolute;inset:6px;z-index:0;border:1px solid rgba(211,239,221,.06);pointer-events:none; }
+#battle .scb-combatant-header { position:relative;z-index:1; }
+#battle .scb-name { color:#f0fff5;font-size:16px;font-weight:500;letter-spacing:.14em; }
+#battle .scb-shield-label { color:#beddd0;font-size:12px; }
+#battle .scb-visual { min-height:140px;margin:5px 0 10px; }
+.silva-combat-symbol { display:grid;place-items:center;position:relative;width:118px;height:118px; }
+.silva-combat-symbol::before,.silva-combat-symbol::after { content:"";position:absolute;inset:0;border:1px solid rgba(186,231,207,.29);border-radius:50%; }
+.silva-combat-symbol::after { inset:10px;border-style:dotted;opacity:.65;transform:rotate(34deg); }
+.silva-combat-symbol-ring { position:absolute;inset:22px;border:1px solid rgba(206,238,222,.44);border-radius:50%;box-shadow:0 0 24px rgba(148,210,180,.1);transform:scaleX(.8) rotate(20deg); }
+.silva-combat-symbol-core { position:relative;z-index:1;color:#d2f7df;font:normal 60px Georgia,serif;text-shadow:0 0 22px rgba(173,250,216,.33); }
+.silva-combat-symbol--enemy::before,.silva-combat-symbol--enemy::after,.silva-combat-symbol--enemy .silva-combat-symbol-ring { border-color:rgba(219,192,233,.29); }
+.silva-combat-symbol--enemy .silva-combat-symbol-core { color:#d7c8eb;text-shadow:0 0 27px rgba(199,145,223,.27); }
+#battle .scb-center { align-self:center;min-width:95px;gap:8px; }
+#battle .scb-round { color:#c5e3d4;font:italic 21px "Cormorant Garamond",Georgia,serif;letter-spacing:.11em; }
+#battle .scb-turn { color:#adcabb;font-size:12px;letter-spacing:.08em; }
+#battle .scb-stat-row { position:relative;color:#a6c9b9;font-size:12px; }
+#battle .scb-meter { height:7px;margin-top:7px;border-radius:0; }
+#battle .scb-meter-fill { transition:width .3s ease;box-shadow:0 0 15px rgba(163,220,202,.28); }
+#battle .scb-enemy-panel .scb-meter-fill { background:#c0a4c9;box-shadow:0 0 14px rgba(192,164,201,.3); }
+#battle .scb-energy-meter .scb-meter-fill { background:#e1d5a3;box-shadow:0 0 14px rgba(211,203,145,.25); }
+#battle .scb-charge { color:#e1c9d9;font-size:12px;margin-top:9px; }
+#battle .scb-resource-row { margin-top:20px;padding:14px 17px;border-top:1px solid rgba(188,235,210,.14);border-bottom:1px solid rgba(188,235,210,.14); }
+#battle .scb-piles { color:#94b7a5;font-size:12px; }
+#battle .scb-hand-section { margin-top:20px; }
+#battle .scb-hand { gap:12px;padding:6px 4px 9px;grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr)); }
+#battle .scb-card { position:relative;isolation:isolate;overflow:hidden;min-height:251px;padding:13px 14px 16px;border:1px solid rgba(185,232,209,.39);background:radial-gradient(ellipse at 50% 38%,rgba(77,140,117,.15),transparent 72%),linear-gradient(163deg,rgba(26,62,54,.98),rgba(9,28,31,.98));box-shadow:inset 0 0 0 4px rgba(5,17,19,.65),inset 0 0 0 5px rgba(190,229,210,.12);display:flex;flex-direction:column;gap:11px;color:#eaffef;transition:transform .19s,border-color .19s,box-shadow .19s; }
+#battle .scb-card::before { position:absolute;inset:7px;content:"";border:1px solid rgba(208,234,216,.14);pointer-events:none; }
+#battle .scb-card[data-kind="attack"] { --kind-glow:rgba(223,177,148,.46);--kind-ink:#f2ceb0; }
+#battle .scb-card[data-kind="guard"] { --kind-glow:rgba(150,211,188,.35);--kind-ink:#bcead6; }
+#battle .scb-card[data-kind="heal"] { --kind-glow:rgba(188,207,233,.32);--kind-ink:#cadef0; }
+#battle .scb-card[data-kind="energy"] { --kind-glow:rgba(226,217,146,.4);--kind-ink:#eae3b0; }
+#battle .scb-card[data-kind="hybrid"] { --kind-glow:rgba(198,190,227,.4);--kind-ink:#dfd1f5; }
+#battle .scb-card:not(:disabled):hover { transform:translateY(-6px);border-color:#d2ffeb;box-shadow:inset 0 0 0 4px rgba(5,17,19,.65),0 9px 24px rgba(0,0,0,.26),0 0 28px var(--kind-glow); }
+#battle .scb-card:disabled { opacity:.43;filter:saturate(.52); }
+#battle .scb-card:focus-visible { outline:2px solid #ddffe9;outline-offset:3px; }
+.silva-card-upper { display:flex;align-items:center;justify-content:space-between;gap:8px; }
+.silva-card-family { color:var(--kind-ink,#bedecd);font-size:11px;letter-spacing:.12em; }
+.silva-card-cost { display:grid;place-items:center;flex:none;width:29px;height:29px;border:1px solid rgba(221,234,200,.59);border-radius:50%;color:#f5ebc6;background:rgba(10,26,27,.55);font:italic 21px "Cormorant Garamond",Georgia,serif;line-height:1; }
+.silva-card-art { display:grid;place-items:center;flex:1 0 76px;min-height:76px;border-top:1px solid rgba(200,243,221,.09);border-bottom:1px solid rgba(200,243,221,.09);background:radial-gradient(circle at 50% 50%,var(--kind-glow,rgba(175,217,193,.25)),transparent 66%); }
+.silva-card-art > span { color:var(--kind-ink,#c3ead6);font:normal 47px Georgia,serif;text-shadow:0 0 22px var(--kind-glow); }
+#battle .scb-card-name { color:#f5fff9;font-size:17px;font-weight:500;letter-spacing:.13em; }
+#battle .scb-card-description { margin-top:auto;color:#a8cfc0;font-size:12px;line-height:1.75; }
+#battle .scb-controls { margin:12px 0 0; }
+#battle .scb-end-turn { min-width:155px;padding:11px 19px;border:1px solid rgba(177,232,202,.55);background:linear-gradient(120deg,rgba(25,75,66,.75),rgba(16,44,47,.8));color:#ebfff4;font:inherit;font-size:14px;letter-spacing:.15em;transition:background .2s,box-shadow .2s; }
+#battle .scb-end-turn:not(:disabled):hover { background:rgba(42,97,80,.93);box-shadow:0 0 25px rgba(157,229,197,.2); }
+#battle .scb-status { padding:9px 12px 0;min-height:2.4em;color:#c0e8d7;font-size:13px;text-align:center;letter-spacing:.08em; }
+/* 戰鬥回饋：命中、守護、療癒及勝負。 */
+#battle .card-impact { animation:card-hit .46s ease; }
+#battle .card-protect { animation:card-shield .6s ease; }
+#battle .card-recover { animation:card-heal .75s ease; }
+@keyframes card-hit { 0%,100%{box-shadow:none;transform:translateX(0)} 24%{box-shadow:0 0 36px rgba(232,142,142,.45);transform:translateX(3px)} 50%{transform:translateX(-4px)} }
+@keyframes card-shield { 0%,100%{box-shadow:none} 50%{box-shadow:0 0 38px rgba(156,239,207,.45),inset 0 0 18px rgba(156,239,207,.17)} }
+@keyframes card-heal { 0%,100%{box-shadow:none} 50%{box-shadow:0 0 38px rgba(178,220,250,.3),inset 0 0 18px rgba(175,223,255,.13)} }
+.card-burst { position:absolute;z-index:3;inset:0;pointer-events:none;opacity:0; }
+.card-burst--attack { animation:card-flash .63s ease-out; }
+.card-burst--heal { animation:card-flash-heal .63s ease-out; }
+@keyframes card-flash { 15%{opacity:1;background:radial-gradient(ellipse at 70% 37%,rgba(212,141,168,.10),transparent 62%)} 100%{opacity:0} }
+@keyframes card-flash-heal { 15%{opacity:1;background:radial-gradient(ellipse at 35% 37%,rgba(159,239,203,.11),transparent 62%)} 100%{opacity:0} }
+.card-stage[data-result="won"] { border-color:rgba(182,250,198,.7);box-shadow:0 0 38px rgba(112,203,158,.2); }
+.card-stage[data-result="lost"] { border-color:rgba(207,157,166,.53); }
+.card-guide { margin:24px 0 18px; }
+.card-guide > div { padding:18px 20px;border-top:1px solid rgba(187,231,211,.2);background:linear-gradient(135deg,rgba(10,31,32,.6),rgba(8,24,26,.42)); }
+.card-guide span { display:block;margin:0 0 10px;color:#acd4be;font:italic 19px "Cormorant Garamond",Georgia,serif; }
+.card-guide strong { display:block;color:#e5f7ee;font-size:14px;letter-spacing:.1em;font-weight:500; }
+.card-guide p { margin:8px 0 0;color:#aac4b7;font-size:12px;line-height:1.9; }
+.card-disclaimer { margin:0;color:#9fb9ac;font-size:12px;line-height:2.1;letter-spacing:.04em; }
+.card-error { background:rgba(69,29,35,.56);border:1px solid rgba(230,173,178,.6);color:#fff0f0; }
+@media (max-width:800px) {
+  .card-main { padding-top:49px; }
+  .card-intro { min-height:190px;padding-bottom:30px; }
+  .card-intro-sigil { width:140px;height:140px; }
+  .sigil-center { font-size:67px; }
+  .sigil-orbit { inset:17px; }
+  .card-stage-heading { padding:17px 18px; }
+  .card-stage-inner { padding:15px 15px 20px; }
+  #battle .scb-hand { display:flex;overflow-x:auto;scroll-snap-type:inline proximity;gap:11px;padding:5px 2px 13px; }
+  #battle .scb-card { flex:0 0 175px;scroll-snap-align:start; }
+}
+@media (max-width:540px) {
+  .card-intro { gap:5px; }
+  .card-intro h1 { font-size:clamp(35px,9vw,49px);letter-spacing:.16em; }
+  .card-intro .section-label { font-size:10px;letter-spacing:.16em; }
+  .card-intro-sigil { width:88px;height:100px;opacity:.7;margin-right:-10px; }
+  .sigil-orbit { inset:12px; }
+  .sigil-center { font-size:48px; }
+  .sigil-caption { display:none; }
+  .card-lead { font-size:12px;line-height:1.9; }
+  .card-stage-heading { padding:15px; }
+  .card-stage-heading h2 { margin:0 7px;font-size:17px; }
+  .card-stage-heading p { display:block;margin:7px 0 0;font-size:11px; }
+  .card-stage-inner { padding:13px 12px 16px; }
+  #battle .scb-arena { gap:9px; }
+  #battle .scb-combatant { padding:13px 14px; }
+  #battle .scb-visual { min-height:92px;margin:5px 0; }
+  .silva-combat-symbol { width:84px;height:84px; }
+  .silva-combat-symbol-core { font-size:45px; }
+  #battle .scb-name { font-size:13px; }
+  #battle .scb-shield-label { font-size:11px; }
+  #battle .scb-round { font-size:18px; }
+  #battle .scb-resource-row { padding:13px 4px; }
+  #battle .scb-hand-section { margin-top:12px; }
+  #battle .scb-card { flex-basis:158px;min-height:225px;padding:11px 12px; }
+  .silva-card-art { flex-basis:65px;min-height:65px; }
+  #battle .scb-card-name { font-size:15px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important; }
+}
