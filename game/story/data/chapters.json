@@ -3,13 +3,13 @@
   "main": [
     {
       "id": "prologue",
-      "title": "序章",
+      "title": "序章｜夢與初見",
       "sections": [
         {
           "id": "prologue",
-          "title": "序章",
+          "title": "夢與初見",
           "file": "prologue/prologue.json",
-          "enabled": false
+          "enabled": true
         }
       ]
     },
@@ -19,15 +19,15 @@
       "sections": [
         {
           "id": "01_01",
-          "title": "第一章第一節",
+          "title": "第一節｜生命之樹",
           "file": "chapter_01/01_01.json",
-          "enabled": false
+          "enabled": true
         },
         {
           "id": "01_02",
-          "title": "第一章第二節",
+          "title": "第二節｜雨與記憶",
           "file": "chapter_01/01_02.json",
-          "enabled": false
+          "enabled": true
         },
         {
           "id": "01_03",

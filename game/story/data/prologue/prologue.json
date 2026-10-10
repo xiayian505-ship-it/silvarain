@@ -1,5 +1,415 @@
 {
   "id": "prologue",
-  "title": "序章",
-  "events": []
+  "title": "序章｜夢與初見",
+  "events": [
+    {
+      "id": "p_001",
+      "type": "scene",
+      "title": "夢與初見",
+      "text": "夢墜於霧中，鹿角乍見於日落之際。\n雨漫林間，幽徑浮現。\n那是一場迷失，或者命定歸途？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_002",
+      "type": "narration",
+      "text": "『此地，為你停留。』",
+      "scene": "mist"
+    },
+    {
+      "id": "p_003",
+      "type": "narration",
+      "text": "微風掠過樹梢，霧氣氤氳，如夢似幻。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_004",
+      "type": "narration",
+      "text": "他緩緩睜眼，視線一片朦朧，隱約中似乎看見了⋯⋯那是鹿角？想看清時卻消失了，也是，這裡霧氣瀰漫，能聽見的只有水聲、風聲、與自己微弱的心跳聲。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_005",
+      "type": "narration",
+      "text": "剛剛，那是⋯⋯？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_006",
+      "type": "narration",
+      "text": "聽到的，是誰的聲音？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_007",
+      "type": "narration",
+      "text": "這裡，是哪？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_008",
+      "type": "choice",
+      "prompt": "霧中有人靠近。璐瑤的第一個念頭是——",
+      "scene": "mist",
+      "options": [
+        {
+          "text": "剛才看見的，是鹿角嗎？",
+          "goto": "p_009"
+        },
+        {
+          "text": "剛才的聲音，是誰？",
+          "goto": "p_009"
+        },
+        {
+          "text": "這裡究竟是哪裡？",
+          "goto": "p_009"
+        }
+      ]
+    },
+    {
+      "id": "p_009",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "醒了。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_010",
+      "type": "narration",
+      "text": "一道少年的聲音自他身後響起。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_011",
+      "type": "narration",
+      "text": "於是，他循聲轉頭，眨了眨眼，然後看到了他。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_012",
+      "type": "narration",
+      "text": "那是一個沒有表情的少年，少年有著鈷藍色的髮與赤紅色的眸，頭上長了一對與髮色相同的、毛茸茸的狼耳，而肩上趴著一隻長著翅膀的老鼠。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_013",
+      "type": "narration",
+      "text": "這一切，都在向他證明，這裡，不是他所熟悉的世界。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_014",
+      "type": "narration",
+      "text": "即便確切地知道自己從未到過，可眼前的景像，他卻覺得如此熟悉。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_015",
+      "type": "narration",
+      "text": "他有許多疑問，卻不知該從何問起。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_016",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "你，是誰？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_017",
+      "type": "narration",
+      "text": "鈷藍髮的狼耳少年沒有回答，只輕飄飄地扔下一句。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_018",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "你又回到了鹿雨森。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_019",
+      "type": "narration",
+      "text": "璐瑤怔了一瞬，感覺有什麼不對勁。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_020",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "你認錯人了？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_021",
+      "type": "narration",
+      "text": "少年只是直勾勾地看著他，像是要把他看穿。這次，語氣比方才更加強硬。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_022",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "你又回到了鹿雨森。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_023",
+      "type": "narration",
+      "text": "鹿雨森？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_024",
+      "type": "narration",
+      "text": "名字聽起來是森林⋯⋯吧？但眼前只有一片迷霧，什麼也看不清，而更重要的是，眼前的狼耳少年，說了兩次相同的話，並且，用的詞語是「又」。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_025",
+      "type": "narration",
+      "text": "所以，這不是自己第一次來到這裡⋯⋯嗎？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_026",
+      "type": "narration",
+      "text": "他看著對方，終於忍不住問。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_027",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "我們以前見過？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_028",
+      "type": "narration",
+      "text": "狼耳少年仍是沒有給他答覆，不知道是不願回答，亦或只是單純的懶得開口說話。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_029",
+      "type": "narration",
+      "text": "倒是少年肩上那隻長著翅膀的小老鼠友好地開口。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_030",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "他是燐珣，我是麻糬，你呢？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_031",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "璐瑤⋯⋯吧？",
+      "scene": "mist"
+    },
+    {
+      "id": "p_032",
+      "type": "narration",
+      "text": "他也不知道為什麼，腦海裡忽然浮現了這個名字，於是脫口而出。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_033",
+      "type": "narration",
+      "text": "麻糬小聲地嘀咕。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_034",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "果然是璐瑤。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_035",
+      "type": "narration",
+      "text": "忽地，燐珣一道警告的眼神瞥過去，麻糬沒有再出聲，但這樣的小細節，璐瑤並沒有漏看。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_036",
+      "type": "narration",
+      "text": "他正想追問，卻聽見了名為燐珣的少年冷淡開口。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_037",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "走。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_038",
+      "type": "narration",
+      "text": "明明是這種命令般的字眼，璐瑤竟下意識點頭，他發現自己不知為何，對燐珣有種莫名的信任，驅使他跟上他的步伐。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_039",
+      "type": "narration",
+      "text": "燐珣的腳步停了下來。",
+      "scene": "mist"
+    },
+    {
+      "id": "p_040",
+      "type": "scene",
+      "title": "霧中沼澤",
+      "text": "霧海漸退，通往鹿雨森的沼澤在前方展開。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_041",
+      "type": "narration",
+      "text": "霧氣漸漸散去，龐大的沼澤浮現，如同沉默的守護者，回應著他們，也等待他們踏入。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_042",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "由祂決定。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_043",
+      "type": "narration",
+      "text": "燐珣手中不知何時多了一盞燈籠。燈籠透出微弱的光。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_044",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "決定什麼？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_045",
+      "type": "narration",
+      "text": "他的疑問越來越多，心底卻有個聲音告訴自己：這些事，他本該知道。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_046",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "鹿雨森。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_047",
+      "type": "narration",
+      "text": "燐珣回頭看他，目光清淡，卻異常認真。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_048",
+      "type": "dialogue",
+      "speaker": "燐珣",
+      "text": "不管哪一次，都是鹿雨森。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_049",
+      "type": "narration",
+      "text": "璐瑤視線望向燐珣手上閃著光芒的燈籠，表面上自己是跟著燐珣的步伐，但燐珣是依據燈籠來判斷應該帶他向哪個方向前行⋯⋯",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_050",
+      "type": "narration",
+      "text": "等等，為什麼自己會知道？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_051",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "璐瑤果然還是回到鹿雨森。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_052",
+      "type": "narration",
+      "text": "麻糬拍了兩下翅膀，沒有再說下去。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_053",
+      "type": "narration",
+      "text": "璐瑤看了眼燐珣的狼耳，再看了眼麻糬的翅膀，他突然意識到，自己，不該屬於這裡。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_054",
+      "type": "narration",
+      "text": "也許，沒有狼耳或是沒有翅膀的自己，其實不屬於這裡？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_055",
+      "type": "narration",
+      "text": "也許，自己應該轉身離開。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_056",
+      "type": "narration",
+      "text": "但，在跟著燐珣的腳步停下的那刻、或是說聽見燐珣開口的剎那，他卻不由自主的覺得，他們像是自己的家人一樣。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_057",
+      "type": "narration",
+      "text": "璐瑤心中忽然閃過一個念頭：",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_058",
+      "type": "narration",
+      "text": "或許，自己根本不是迷路，而是踏上歸途。",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_059",
+      "type": "narration",
+      "text": "可為什麼，這裡的自己，好像並不屬於自己？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_060",
+      "type": "narration",
+      "text": "自己是誰？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_061",
+      "type": "narration",
+      "text": "到底，忘了什麼？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_062",
+      "type": "narration",
+      "text": "或者說，錯過了什麼？",
+      "scene": "swamp"
+    },
+    {
+      "id": "p_063",
+      "type": "narration",
+      "text": "璐瑤，真的是他的名字嗎？",
+      "scene": "swamp"
+    }
+  ]
 }

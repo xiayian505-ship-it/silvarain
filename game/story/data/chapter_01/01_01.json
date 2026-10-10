@@ -1,5 +1,446 @@
 {
   "id": "01_01",
-  "title": "第一章第一節",
-  "events": []
+  "title": "第一章｜第一節",
+  "events": [
+    {
+      "id": "c101_001",
+      "type": "scene",
+      "title": "有些相遇，從來都不是巧合",
+      "text": "選中之人踏上旅途，尋夢將至——終會，依附彼岸。\n迷霧散盡，鹿雨森默然守候。\n生命之樹低語：此地，為你停留。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_002",
+      "type": "narration",
+      "text": "鹿雨森的雨，不曾真正停過。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_003",
+      "type": "narration",
+      "text": "不過，現在的璐瑤還不知道，更不知道，自己將會被這個地方深深吸引。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_004",
+      "type": "narration",
+      "text": "他跟著燐珣穿越霧氣籠罩的沼澤，腳下踏過的每一步，明明陌生、卻又無比熟悉。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_005",
+      "type": "narration",
+      "text": "周身滿是濕氣，但卻感受不到一絲涼意。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_006",
+      "type": "narration",
+      "text": "璐瑤低頭看了眼自己在泥沼中踩出的鞋印，即便困惑，還是繼續跟在燐珣身邊。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_007",
+      "type": "narration",
+      "text": "反正，從睜眼看見這個世界的那刻，他的疑問就沒有停止過。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_008",
+      "type": "narration",
+      "text": "他忽然浮現另一個、從一開始就被自己莫名的忽略掉的問題。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_009",
+      "type": "narration",
+      "text": "如果這裡不屬於自己，那麼，自己又是從何而來？",
+      "scene": "swamp"
+    },
+    {
+      "id": "c101_010",
+      "type": "scene",
+      "title": "生命之樹",
+      "text": "參天枝葉遮蔽天空，鹿雨森的心臟在雨幕裡緩緩顯現。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_011",
+      "type": "narration",
+      "text": "直至一棵參天大樹映入眼簾，燐珣的腳步才終於停下。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_012",
+      "type": "narration",
+      "text": "那棵大樹高達天際，枝葉層層交疊，綠得濃郁，將整片大地籠罩其中。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_013",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "璐瑤，這是生命之樹。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_014",
+      "type": "narration",
+      "text": "麻糬指向高聳入雲的大樹。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_015",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "或者你想叫它中央公寓也行。總之，這是我們住的地方。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_016",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "我也住這裡？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_017",
+      "type": "narration",
+      "text": "璐瑤有些詫異。自己這樣一個初來乍到、連外貌都格格不入的人，也能住在這裡嗎？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_018",
+      "type": "dialogue",
+      "speaker": "？？？",
+      "text": "起碼你絕對不會住在星落城，或塵埃谷。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_019",
+      "type": "narration",
+      "text": "一個女孩的聲音忽然從旁響起，帶著熟稔的喜悅。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_020",
+      "type": "dialogue",
+      "speaker": "？？？",
+      "text": "哥哥，你終於來了！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_021",
+      "type": "narration",
+      "text": "語調輕快又夾些熟稔，像是他們已經認識許久。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_022",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "哥哥？我？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_023",
+      "type": "narration",
+      "text": "璐瑤茫然地指向自己。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_024",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "吼，燐珣你又沒講清楚！真是的。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_025",
+      "type": "narration",
+      "text": "女孩嘴裡抱怨著燐珣，目光卻落在麻糬身上。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_026",
+      "type": "narration",
+      "text": "雖然話中指明說的是燐珣，女孩開口的對象卻是燐珣肩上的麻糬，這點細節，璐瑤沒有漏看。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_027",
+      "type": "narration",
+      "text": "同時也發現，燐珣、似乎不好接近？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_028",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "不是我的錯喔！妳不也知道，阿珣本來就是這樣。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_029",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "也是。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_030",
+      "type": "narration",
+      "text": "女孩聳聳肩，朝璐瑤走來，聲音藏不住興奮。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_031",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "那麼，哥哥，自我介紹一下，我是棠月！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_032",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "棠月、棠月。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_033",
+      "type": "narration",
+      "text": "璐瑤低聲重複那個名字。莫名的熟悉感又湧了上來。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_034",
+      "type": "narration",
+      "text": "不對，璐瑤只覺得腦海一片亂糟糟的，確切來說，從睜眼看到這一切開始，他都覺得熟悉。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_035",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "你被生命之樹選中了，才能住在這裡。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_036",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "這裡，是鹿雨森唯一和平的中央公寓。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_037",
+      "type": "narration",
+      "text": "和平？會特意使用這個詞的話。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_038",
+      "type": "narration",
+      "text": "「和平」這個詞讓璐瑤起了疑心。他忍不住問。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_039",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "你們在打仗嗎？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_040",
+      "type": "narration",
+      "text": "棠月正想回答，卻被麻糬叫住。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_041",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "棠月。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_042",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "在！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_043",
+      "type": "narration",
+      "text": "她像被老師點名般立刻站直，視線卻落在燐珣身上。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_044",
+      "type": "narration",
+      "text": "而璐瑤則跟著棠月的視線，一起看向了麻糬。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_045",
+      "type": "narration",
+      "text": "麻糬用小爪子碰了碰燐珣手中的燈籠。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_046",
+      "type": "dialogue",
+      "speaker": "麻糬",
+      "text": "棠月，燐珣該工作了。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_047",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "沒問題，哥哥交給我。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_048",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "拜拜，工作狂！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_049",
+      "type": "narration",
+      "text": "聽了這話，燐珣腳步頓了一下，依舊沒有回應，只是稍稍偏頭，視線掃過璐瑤一瞬，便和麻糬一起消失在兩人視線之中。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_050",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "燐珣這是去打仗嗎？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_051",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "以後你會知道的。哥哥，鹿雨森可是唯一中立的地方。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_052",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "打仗的是星落城和塵埃谷。她們打了百年都不分勝負，不過不用擔心！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_053",
+      "type": "narration",
+      "text": "她語氣輕鬆，像是在說一篇無關緊要的故事，很久以後的璐瑤才會知道，對於在鹿雨森的他們來說，星落城和塵埃谷的戰事，確實像是故事、或傳說。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_054",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "可要是，打到這裡來呢？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_055",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "你剛剛踏過的沼澤，只有燐珣能夠穿越。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_056",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "沒有他，誰也到不了鹿雨森。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_057",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "可是⋯⋯",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_058",
+      "type": "narration",
+      "text": "他想說，自己明明就到了鹿雨森。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_059",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "是燐珣帶著你來的呀。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_060",
+      "type": "narration",
+      "text": "璐瑤愣了一下，想開口反駁，卻忽然發現，好像確實是這麼回事。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_061",
+      "type": "dialogue",
+      "speaker": "璐瑤",
+      "text": "那，為什麼叫我哥哥？",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_062",
+      "type": "narration",
+      "text": "這個問題一直壓在心底。眼前女孩的臉熟悉又陌生，記憶深處彷彿有什麼一閃即逝。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_063",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "因為——",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_064",
+      "type": "dialogue",
+      "speaker": "棠月",
+      "text": "哥哥就是哥哥啊！",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_065",
+      "type": "narration",
+      "text": "她的聲音不帶任何解釋，但語氣裡卻有著無法質疑的堅定。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_066",
+      "type": "narration",
+      "text": "璐瑤還想解釋，但這幾個字卻莫名地梗在喉間。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_067",
+      "type": "narration",
+      "text": "那句『我們明明是第一次見面吧？』他怎麼也說不出口。",
+      "scene": "tree"
+    },
+    {
+      "id": "c101_068",
+      "type": "narration",
+      "text": "雨聲漸強，霧色變得更濃，世界彷彿成了兩個時空。",
+      "scene": "tree"
+    }
+  ]
 }

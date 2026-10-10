@@ -3,7 +3,7 @@
   "use strict";
 
   const CONFIG = {
-    gameUrl: "", // 正式遊戲尚未連接，保留原本轉場後提示的行為。
+    gameUrl: "./story/", // 正式遊戲入口先接 Story；戰鬥玩法未定。
     homeUrl: "https://silvarain.stillnessbyslowly.com/"
   };
 
@@ -70,7 +70,8 @@
     setTimeout(() => {
       window.dispatchEvent(new CustomEvent("silvarain:start"));
       if (CONFIG.gameUrl) {
-        location.href = CONFIG.gameUrl;
+        if (window.SlowlyNavigation) window.SlowlyNavigation.go(CONFIG.gameUrl);
+        else location.href = CONFIG.gameUrl;
         return;
       }
       document.body.classList.remove("entering");

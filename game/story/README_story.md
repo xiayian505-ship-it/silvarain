@@ -1,59 +1,64 @@
-# 鹿雨森 Story｜預留骨架 v1
+# 鹿雨森 Story｜劇情試讀版 v2
 
-這個 ZIP **只新增 `game/story/`**，不含也不覆蓋現有 `game/index.html`、`game.js` 或任何 Demo。
+這包根據使用者提供的《序章｜夢與初見》及《第一章｜有些相遇，從來都不是巧合》原稿製作，整理、精簡部分敘述成適合視覺小說的台詞；**這不是最終定稿**。正式立繪、背景與關卡玩法尚未定案。
 
-## 結構
-- `index.html`：劇情目錄及閱讀頁的固定結構
-- `story.css` / `story.js`：核心布局／唯一劇情狀態與流程管理
-- `story_style.css` / `story_style.js`：鹿雨森外觀／UI 事件（不另做劇情流程）
-- `data/chapters.json`：主線順序、每節檔案及是否開放、番外目錄
-- `data/prologue/prologue.json`：序章
-- `data/chapter_01/01_01.json` ～ `data/chapter_10/10_10.json`：十章各十小節，共 100 份
-- `data/epilogue/epilogue.json`：尾聲
-- `data/extras/extra_01.json`、`extra_02.json`：番外
+## 開啟方式
 
-劇情檔共 104，另加章節索引 1，共 105 個 JSON。
+- 正式遊戲入口 `/game/` 的「踏入霧中」按鈕，已連到 `/game/story/`。
+- 亦可直接進入 `/game/story/` 測試劇情目錄與播放器。
+- 使用 GitHub Pages 或其他 HTTP 伺服器開啟。**不可使用 `file://` 雙擊開啟**，因為 `fetch()` 會受瀏覽器安全限制。
+- 深林、薄霧和雨幕引用慢慢軍火庫的 HTTPS 零件；外網載入失敗時仍會顯示 CSS 氛圍背景。沒有額外加入音樂。
 
-## 寫一節劇情的順序
-1. 找到對應的 JSON，例如 `data/chapter_01/01_01.json`。
-2. 保持 `id` 不變，在 `events` 內依序填上劇情事件，每個事件推薦有**穩定、唯一的 ID**。
-3. 修改 `data/chapters.json` 對應小節的 `enabled` 為 `true`。沒有實際文字的預留檔保持 `false`。
-4. 使用 GitHub Pages 或本機 HTTP 伺服器開啟 `game/story/`；直接雙擊 `file://` HTML 會被瀏覽器的 fetch 安全限制擋下。
+## 故事資料
 
-### JSON 的劇情事件例子（僅文件說明，未寫進預留劇情）
+- `data/prologue/prologue.json`：序章（已啟用）
+- `data/chapter_01/01_01.json`：第一章第一節，生命之樹（已啟用）
+- `data/chapter_01/01_02.json`：第一章第二節，雨與記憶（已啟用）
+- 正文其餘 98 個小節：預留未啟用，維持 `events: []`
+- 尾聲、番外 1、番外 2：預留未啟用
+- `data/chapters.json`：章節順序、每節路徑、是否啟用和番外條件
+
+劇情檔案共 104 個，另有 1 份章節索引，合計 105 個 JSON。
+
+## 閱讀規則
+
+1. 初次只開放序章；讀完後解鎖第一章。
+2. 第一章第一節讀完，解鎖第一章第二節；讀完目前啟用的兩節，記錄第一章完成。
+3. 第二章尚無正文，因此不會讓玩家進入空白 JSON。
+4. 已解鎖的內容可從主線目錄隨時重看；讀到一半可返回目錄或按「繼續閱讀」恢復。
+5. 番外與主線分開，目前兩份仍預留，將來可以自行指定解鎖條件。
+6. 進度保存在該裝置瀏覽器 localStorage，沒有登入與跨裝置同步。
+
+## 更新文案（每一小節獨立 JSON）
 
 ```json
 {
   "id": "01_01",
-  "title": "第一章第一節",
+  "title": "第一章｜第一節",
   "events": [
-    { "id": "01_01_001", "type": "narration", "text": "雨聲漸近。" },
-    { "id": "01_01_002", "type": "dialogue", "speaker": "璐瑤", "text": "這裡是哪裡？" },
-    { "id": "01_01_003", "type": "choice", "prompt": "要怎麼回答？", "options": [
-      { "text": "靜靜觀察", "goto": "01_01_004" },
-      { "text": "繼續前進", "goto": "01_01_004" }
-    ] },
-    { "id": "01_01_004", "type": "narration", "text": "他向前踏出一步。" }
+    { "id": "01_01_001", "type": "narration", "scene": "tree", "text": "鹿雨森的雨，不曾真正停過。" },
+    { "id": "01_01_002", "type": "dialogue", "scene": "tree", "speaker": "麻糬", "text": "這是生命之樹。" }
   ]
 }
 ```
 
-`choice.options[].goto` 是**當前小節內**的事件 ID，不是陣列第幾筆，也不是網頁 URL。
-跨頁網頁跳轉交由軍火庫 `https://lib.stillnessbyslowly.com/state/navigation/navigation.js`；劇情內的進退由唯一 `story.js` 管理。
+- 穩定 `id` 用於記錄位置和選項跳轉；不要隨便更改已發佈事件 ID。
+- 支援 `scene`、`narration`、`dialogue`、`choice`、`challenge`（關卡尚未接入）。
+- `scene` 欄位目前支援 `mist`、`swamp`、`tree`、`rain` 四種演出色調；無正式角色立繪時使用鹿角符號與環境燈光。
+- `choice` 的 `options[].goto` 指向**本小節事件 ID**，不是網頁 URL。網頁跨頁跳轉由軍火庫 `SlowlyNavigation` 執行，遊戲內進度只由 `story.js` 管理。
+- 文字填完後到 `chapters.json` 將該節 `enabled` 設為 `true`，未填稿不要啟用。
 
-## 解鎖規則
-- 第一次只可能閱讀已發表的序章，預留檔不算已發表。
-- 每一章中已啟用的小節按順序初次閱讀；讀過的可以從目錄任意重看。
-- 完成一章所有**已啟用**小節，解鎖下一章（下一章仍需有已發表小節才能進去）。
-- 讀完第十章才解鎖尾聲；序章與尾聲是獨立篇章。
-- 番外不影響主線；`enabled: true` 才能進入，`unlockAfter` 預設 `null` 表示公開後即可看；未來可設定 `chapter_03` 等已完成章節 ID。
-- 進度用 localStorage 儲存在**玩家自己裝置及瀏覽器**，不會跨裝置同步。
-- 目前 `challenge` 只是**接口預留**，並不實際啟動卡牌／三消／合成；未接入時會停在該事件，不會假裝通關。
-- 正式故事稿尚未加入；目前所有 `enabled: false`，這是刻意保留的安全狀態。
+## 技術檔案職責
 
-**注意：** 如果已發表的一章後來再啟用新小節，既有玩家已解鎖的章節不會自動收回（已解鎖狀態保持單調），但新節仍要依規則閱讀才會被記為完成。若後續要更精細的版本控制和存檔遷移，應另外設計。
+- `index.html`：劇情目錄、讀取視圖、對話場景的 DOM
+- `story.css`：基本布局
+- `story.js`：**唯一的劇情流程／解鎖狀態管理者**
+- `story_style.css`：鹿雨森風格（可換美術素材）
+- `story_style.js`：UI 事件與軍火庫雨霧森林視覺
 
-## 發布備註
-- 本 ZIP 不修改正式遊戲入口的「踏入霧中」按鈕連結，也不影響既有 Demo。
-- 部署後可以直接造訪 `/game/story/` 看預留目錄。要從遊戲入口進 Story，等確認入口流程後再接。
-- 軍火庫元件仍從 HTTPS 絕對網址讀取，沒有複製 JS。
+`/game/index.html` 和 `/game/game_style.js` **只有增加跳往 Story 的入口**；官網與 Demo 原樣保留。整包 ZIP 不包含 `.git/`，避免覆蓋使用者自己的 Git 設定和紀錄。**沒有直接修改 GitHub。**
+
+### 開發提醒
+- 這是可試讀、可驗收 UI 的故事版，而非已定案的正式遊戲。
+- 劇本事件 ID 現由此試讀版建立；若日後大量改寫正文或事件順序，已有玩家的書籤可能指向不同劇情位置，需要另作存檔遷移。
+- 不要在更多 JS 檔各自實作故事跳轉或重新編寫軍火庫功能。

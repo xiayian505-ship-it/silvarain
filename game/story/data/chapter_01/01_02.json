@@ -1,5 +1,159 @@
 {
   "id": "01_02",
-  "title": "第一章第二節",
-  "events": []
+  "title": "第一章｜第二節",
+  "events": [
+    {
+      "id": "c102_001",
+      "type": "scene",
+      "title": "有些相遇，從來都不是巧合",
+      "text": "選中之人踏上旅途，尋夢將至——終會，依附彼岸。\n迷霧散盡，鹿雨森默然守候。\n生命之樹低語：此地，為你停留。",
+      "scene": "swamp"
+    },
+    {
+      "id": "c102_002",
+      "type": "scene",
+      "title": "雨與記憶",
+      "text": "細雨再度落下。樹下的時間，彷彿與森林其他地方不同。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_003",
+      "type": "narration",
+      "text": "細雨再次落下，綿延不斷，像是要讓整個世界被水覆蓋。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_004",
+      "type": "narration",
+      "text": "璐瑤轉頭，看向生命之樹，心底浮現一股暖意，枝葉隨風搖曳，像是在歡迎他回家。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_005",
+      "type": "narration",
+      "text": "他的疑惑又更深些，他是真不記得自己來過這個地方，但眼前的景象卻彷彿刻入靈魂般，熟悉。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_006",
+      "type": "narration",
+      "text": "不只這樣。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_007",
+      "type": "narration",
+      "text": "無論是燐珣、麻糬，還是棠月，對他，都不像是與他初識。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_008",
+      "type": "narration",
+      "text": "要他來形容的話，他們對他，像是相識許久的老朋友。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_009",
+      "type": "narration",
+      "text": "明明他什麼也不記得。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_010",
+      "type": "narration",
+      "text": "雨水落在他的髮絲，順著他的髮絲，向下流到臉頰上，冰冰涼涼的。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_011",
+      "type": "narration",
+      "text": "璐瑤忽然發現，這裡、又是霧氣又是細雨。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_012",
+      "type": "narration",
+      "text": "氣候，不自然⋯⋯",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_013",
+      "type": "narration",
+      "text": "璐瑤的思緒猛然停下。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_014",
+      "type": "narration",
+      "text": "不自然？為什麼自己會覺得不自然？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_015",
+      "type": "narration",
+      "text": "可如果這樣的氣候不自然，那，什麼樣的氣候，才自然呢？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_016",
+      "type": "dialogue",
+      "speaker": "？？？",
+      "text": "悄然拭去的，是誰曾經的名？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_017",
+      "type": "narration",
+      "text": "那樣的低喃，來自哪裡？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_018",
+      "type": "narration",
+      "text": "璐瑤還來不及分清，就見一片落葉飄在空中，他隨手拈起，那瞬間，似乎有什麼在眼前滑過。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_019",
+      "type": "narration",
+      "text": "那是，鹿？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_020",
+      "type": "narration",
+      "text": "亦或是什麼其他的⋯⋯？",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_021",
+      "type": "narration",
+      "text": "璐瑤瞇著眼想看清，霧氣卻變得更濃了。他低頭看看自己的手，不知道為什麼，指尖不自覺的、發顫。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_022",
+      "type": "narration",
+      "text": "記得這裡嗎？他不知道。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_023",
+      "type": "narration",
+      "text": "可他的腳步卻在下一秒，往前踏出，踏向眼前的生命之樹。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_024",
+      "type": "narration",
+      "text": "也許，他真的是回來了。",
+      "scene": "rain"
+    },
+    {
+      "id": "c102_025",
+      "type": "narration",
+      "text": "也許，有些相遇，從來都不是巧合。",
+      "scene": "rain"
+    }
+  ]
 }

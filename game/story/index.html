@@ -2,72 +2,133 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#071719">
-  <meta name="description" content="鹿雨森 Silvarain｜主線劇情與番外故事">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071416">
+  <meta name="description" content="鹿雨森｜Silvarain，閱讀迷霧中遺失的故事。">
   <title>鹿雨森｜故事紀錄</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
-  <!-- 軍火庫：僅 HTTPS 絕對網址引用，不複製模組內容。 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <!-- 軍火庫共用零件：只載入公開 HTTPS 原檔，不複製進專案。 -->
   <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/ui/responsive.css">
   <link rel="stylesheet" href="./story.css">
   <link rel="stylesheet" href="./story_style.css">
   <script src="https://lib.stillnessbyslowly.com/state/navigation/navigation.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/pine_forest.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/fog.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/rain.js" defer></script>
   <script src="./story.js" defer></script>
   <script src="./story_style.js" defer></script>
 </head>
 <body>
-  <div class="mist-haze" aria-hidden="true"></div>
+  <div class="forest-backdrop" aria-hidden="true">
+    <canvas id="storyForestBack"></canvas>
+    <canvas id="storyFog"></canvas>
+    <canvas id="storyForestFront"></canvas>
+    <canvas id="storyRain"></canvas>
+    <div class="forest-glow"></div>
+  </div>
+
   <main class="shell">
     <header class="header">
-      <button type="button" id="backButton" class="quiet-button" aria-label="返回遊戲入口">← 遊戲入口</button>
       <div class="brand">
-        <p class="eyebrow">SILVARAIN · STORY ARCHIVE</p>
-        <h1>鹿雨森<span class="accent">｜故事紀錄</span></h1>
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <div>
+          <p class="eyebrow">SILVARAIN <span class="eyebrow-rule">/</span> STORY</p>
+          <h1>鹿雨森<span class="brand-sub">｜故事紀錄</span></h1>
+        </div>
       </div>
+      <button type="button" id="backButton" class="quiet-button header-exit" aria-label="返回遊戲入口">返回霧中入口 <span aria-hidden="true">↗</span></button>
     </header>
 
-    <section id="catalogScreen" class="screen" aria-label="劇情目錄">
-      <div class="catalog-head">
-        <div>
-          <h2>迷霧中的篇章</h2>
-          <p class="muted">已解鎖的故事可以隨時重新閱讀。</p>
+    <section id="catalogScreen" class="screen catalog" aria-label="劇情目錄">
+      <div class="catalog-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">CHRONICLES OF THE MIST</p>
+          <p class="hero-caption">有些相遇，從來都不是巧合。</p>
+          <h2>每一場雨，<br><em>都藏著未說完的故事。</em></h2>
+          <p class="hero-intro">循著迷霧留下的痕跡，翻開那段不曾被遺忘的記憶。</p>
+          <button id="resumeButton" class="primary-button resume-button" type="button" hidden>循著記憶繼續閱讀 <span aria-hidden="true">→</span></button>
         </div>
-        <button id="resumeButton" class="primary-button" type="button" hidden>繼續閱讀</button>
+        <div class="hero-emblem" aria-hidden="true">
+          <svg viewBox="0 0 250 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="125" cy="132" r="94" stroke="currentColor" stroke-opacity=".19"/>
+            <circle cx="125" cy="132" r="74" stroke="currentColor" stroke-opacity=".11"/>
+            <path d="M125 225 C125 171 119 140 114 124 M114 124 C95 114 79 96 68 60 M94 105 C75 97 58 81 52 43 M80 92 C72 74 73 55 81 35 M113 126 C130 111 143 91 154 64 M136 105 C162 93 177 71 187 40 M148 83 C151 65 147 44 140 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M125 225 C126 170 132 140 137 124 M137 124 C156 114 172 96 183 60 M157 105 C176 97 193 81 199 43 M171 92 C179 74 178 55 170 35 M138 126 C121 111 108 91 97 64 M115 105 C89 93 74 71 64 40 M103 83 C100 65 104 44 111 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+            <circle cx="125" cy="132" r="5" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="catalog-toolbar">
+        <div>
+          <p class="eyebrow">STORY COLLECTION</p>
+          <h2 class="section-heading">故事篇章</h2>
+        </div>
+        <p class="catalog-hint">選擇已解鎖的篇章，便能隨時回到那場雨裡。</p>
       </div>
       <nav class="story-tabs" aria-label="故事分類">
-        <button id="mainTab" class="tab is-active" type="button" aria-pressed="true">主線故事</button>
-        <button id="extrasTab" class="tab" type="button" aria-pressed="false">番外故事</button>
+        <button id="mainTab" class="tab is-active" type="button" aria-pressed="true">✦ 主線故事</button>
+        <button id="extrasTab" class="tab" type="button" aria-pressed="false">❋ 番外紀事</button>
       </nav>
       <div id="catalogList" class="catalog-list" aria-live="polite"></div>
+      <p class="catalog-note">只有已填入正文並啟用的小節會顯示；其餘位置留給尚未到來的故事。</p>
     </section>
 
     <section id="readerScreen" class="screen reader" hidden aria-label="閱讀劇情">
       <div class="reader-top">
-        <button id="returnCatalog" class="quiet-button" type="button">← 故事目錄</button>
+        <button id="returnCatalog" class="quiet-button reader-back" type="button">← 故事目錄</button>
         <span id="readerHeading" class="reader-heading"></span>
       </div>
-      <div class="stage" aria-hidden="true"><div class="stage-orbit"></div></div>
-      <article class="dialogue" aria-live="polite">
+      <div class="reader-progress" aria-hidden="true"><span id="progressFill"></span></div>
+      <div class="visual-stage" id="visualStage" data-scene="mist" aria-hidden="true">
+        <div class="stage-mist"></div>
+        <div class="stage-art">
+          <div class="stage-halo"></div>
+          <div class="stage-antler">
+            <svg viewBox="0 0 230 190" fill="none" aria-hidden="true">
+              <path d="M114 168 Q103 130 89 112 Q64 85 54 28 M86 106 Q57 91 43 59 M72 86 Q66 59 74 34 M114 168 Q125 130 139 112 Q164 85 174 28 M142 106 Q171 91 185 59 M156 86 Q162 59 154 34" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
+              <circle cx="114" cy="168" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div class="stage-place">
+          <span class="place-line" aria-hidden="true"></span>
+          <span id="sceneKicker">SILVARAIN</span>
+          <span class="place-line" aria-hidden="true"></span>
+        </div>
+        <div class="stage-caption">
+          <span class="stage-caption-label">MEMORIES BENEATH THE RAIN</span>
+          <span id="sceneTitle">迷霧之森</span>
+        </div>
+        <div id="stageSpeaker" class="stage-speaker" hidden></div>
+      </div>
+      <article class="dialogue" id="dialoguePanel" aria-label="劇情對話">
+        <div class="dialogue-crest" aria-hidden="true">✧</div>
         <p id="speakerName" class="speaker"></p>
         <div id="storyText" class="story-text"></div>
         <div id="storyChoices" class="story-choices"></div>
-        <div class="reader-footer"><span id="readingPosition" class="muted"></span><button id="nextButton" class="primary-button" type="button">下一句 →</button></div>
+        <div class="reader-footer">
+          <span id="readingPosition" class="reading-position"></span>
+          <button id="nextButton" class="primary-button next-button" type="button">繼續閱讀 <span aria-hidden="true">›</span></button>
+        </div>
+        <span class="tap-hint">點擊對話框空白處亦可繼續</span>
       </article>
       <p id="readerNotice" class="notice" role="status" hidden></p>
     </section>
 
     <section id="statusScreen" class="screen status" hidden aria-live="polite">
       <p class="eyebrow">STILLNESS BY SLOWLY</p>
-      <h2 id="statusTitle">讀取中</h2>
+      <div class="status-mark" aria-hidden="true">✦</div>
+      <h2 id="statusTitle">正在翻開故事</h2>
       <p id="statusText" class="muted"></p>
       <div class="status-actions">
-        <button id="statusNext" class="primary-button" type="button" hidden>下一節 →</button>
+        <button id="statusNext" class="primary-button" type="button" hidden>閱讀下一節 →</button>
         <button id="statusBack" class="quiet-button" type="button">返回故事目錄</button>
       </div>
     </section>
-    <footer class="footnote">鹿雨森的雨，不曾真正停過。</footer>
+    <footer class="footnote">慢 慢 <span>｜</span> Stillness by Slowly <span class="footnote-dot">✦</span> 鹿雨森的雨，不曾真正停過。</footer>
   </main>
 </body>
 </html>
