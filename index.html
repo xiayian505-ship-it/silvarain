@@ -1,47 +1,312 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>鹿雨森 | Silvarain</title>
-  <link rel="stylesheet" href="./css/style.css" />
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>鹿雨森 | Silvarain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--mist:#dbeae5;--teal:127,209,189;--deep:#071213}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--deep);overflow:hidden}
+body{font-family:"Noto Serif TC","Songti TC","PMingLiU","Noto Serif CJK TC",serif;color:var(--mist);-webkit-tap-highlight-color:transparent}
+canvas{position:fixed;left:-4%;top:-4%;width:108%;height:108%;pointer-events:none;will-change:transform}
+#back{z-index:1}#fog{z-index:2}#front{z-index:3}#rain{z-index:4}
+#flash{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;mix-blend-mode:screen;background:radial-gradient(ellipse at 50% 15%,#e8fff7,#8fc9bb 45%,transparent 85%)}
+.vignette{position:fixed;inset:0;z-index:6;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 42%,rgba(2,8,9,.78) 100%)}
+#veil{position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;background:radial-gradient(circle,#d3e9e2,#7fb0a5 75%);transition:opacity 2s ease}
+body.entering #veil{opacity:1}
+body.entering{pointer-events:none}
 
+#ui{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(24px + env(safe-area-inset-top)) 20px calc(48px + env(safe-area-inset-bottom));transition:opacity 1.6s ease,filter 1.6s ease,transform 1.6s ease}
+body.entering #ui{opacity:0;filter:blur(12px);transform:scale(1.05)}
+
+#antler{width:min(300px,64vw);overflow:visible;margin-bottom:-6px;filter:drop-shadow(0 0 5px rgba(var(--teal),.6)) drop-shadow(0 0 22px rgba(var(--teal),.28));animation:glow 7s ease-in-out infinite}
+#antler path{fill:none;stroke:rgba(196,240,226,.85);stroke-width:1.1;stroke-linecap:round}
+@keyframes glow{50%{opacity:.7}}
+
+h1{font-weight:700;font-size:clamp(76px,24vw,170px);line-height:1.05;letter-spacing:.14em;text-indent:.14em;color:#eaf5f0}
+h1 span{display:inline-block;opacity:0;animation:rise 2.6s cubic-bezier(.2,.7,.2,1) forwards,breathe 6s ease-in-out infinite;animation-delay:calc(var(--i)*.5s + 1s),calc(var(--i)*.5s + 4s)}
+@keyframes rise{from{opacity:0;filter:blur(20px);transform:translateY(28px) scale(1.1)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes breathe{0%,100%{text-shadow:0 0 16px rgba(var(--teal),.4),0 0 60px rgba(var(--teal),.2),0 6px 30px rgba(0,0,0,.6)}50%{text-shadow:0 0 26px rgba(var(--teal),.7),0 0 90px rgba(var(--teal),.35),0 6px 30px rgba(0,0,0,.6)}}
+
+.fade{opacity:0;animation:fadeIn 2.4s ease forwards;animation-delay:var(--d)}
+@keyframes fadeIn{to{opacity:1}}
+.en{font-family:"Cormorant Garamond","Palatino Linotype",Georgia,serif;font-style:italic;font-size:clamp(16px,4.2vw,23px);letter-spacing:.14em;color:rgba(222,240,234,.82);margin-top:6px;max-width:92vw}
+.rule{width:min(240px,50vw);height:1px;margin:22px 0 20px;background:linear-gradient(90deg,transparent,rgba(var(--teal),.7),transparent)}
+.tag{font-weight:300;font-size:clamp(13px,3.7vw,17px);letter-spacing:.34em;text-indent:.34em;color:rgba(205,228,221,.78)}
+
+.menu{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:46px}
+.btn{font:500 clamp(16px,4.4vw,19px) "Noto Serif TC","Songti TC",serif;letter-spacing:.55em;text-indent:.55em;min-width:min(260px,72vw);padding:15px 20px;color:var(--mist);background:rgba(10,28,28,.4);border:1px solid rgba(190,225,215,.3);border-radius:2px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;position:relative;overflow:hidden;transition:border-color .5s,box-shadow .5s,color .5s,opacity .5s}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(200,240,228,.24),transparent 70%);transform:translateX(-120%);transition:transform .9s}
+.btn:hover::before,.btn:focus-visible::before{transform:translateX(120%)}
+.btn:hover,.btn:focus-visible{border-color:rgba(160,235,210,.85);box-shadow:0 0 30px rgba(var(--teal),.3),inset 0 0 18px rgba(var(--teal),.12);color:#fff;outline:none}
+.btn:active{transform:scale(.985)}
+.primary{border-color:rgba(160,235,210,.6);box-shadow:0 0 22px rgba(var(--teal),.2)}
+.ghost{font-size:clamp(14px,3.8vw,16px);opacity:.68;border-color:rgba(190,225,215,.2)}
+.ghost:hover,.ghost:focus-visible{opacity:1}
+
+#sound{position:fixed;z-index:11;top:calc(14px + env(safe-area-inset-top));right:16px;font:300 13px "Noto Serif TC",serif;letter-spacing:.2em;color:rgba(214,235,228,.75);background:rgba(10,28,28,.35);border:1px solid rgba(190,225,215,.22);border-radius:20px;padding:7px 14px;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:.4s}
+#sound:hover,#sound:focus-visible{color:#fff;border-color:rgba(160,235,210,.7);outline:none}
+.hint{position:fixed;z-index:11;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));text-align:center;font-size:12px;font-weight:300;letter-spacing:.3em;color:rgba(200,225,218,.5)}
+#toast{position:fixed;z-index:30;left:50%;bottom:calc(70px + env(safe-area-inset-bottom));transform:translate(-50%,10px);padding:10px 22px;font-size:14px;letter-spacing:.15em;background:rgba(8,22,22,.85);border:1px solid rgba(160,235,210,.4);border-radius:2px;opacity:0;pointer-events:none;transition:.6s;white-space:nowrap}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){h1 span,.fade{animation-duration:.01s;animation-delay:0s}#antler{animation:none}}
+</style>
+</head>
 <body>
 
-  <!-- 區塊 1：作品識別 -->
-  <section class="identity">
-    <h1 class="title-main">鹿雨森</h1>
-    <h2 class="title-sub">Silvarain: Silent Antler of Silvarain</h2>
-    <p class="tagline">在霧未散去的地方，仍保留著某些聲音。</p>
-  </section>
+<canvas id="back"></canvas>
+<canvas id="fog"></canvas>
+<canvas id="front"></canvas>
+<canvas id="rain"></canvas>
+<div id="flash"></div>
+<div class="vignette"></div>
+<div id="veil"></div>
 
-  <!-- 區塊 2：作品概念 -->
-  <section class="concept">
-    <h3>作品概念</h3>
-    <p>（之後填入作品氣質說明文字）</p>
-  </section>
+<button id="sound" type="button" aria-pressed="false">雨聲 · 關</button>
 
-  <!-- 區塊 3：世界介紹 -->
-  <section class="world">
-    <h3>世界 · Silvarain</h3>
-    <p>（之後填入世界介紹文字）</p>
-  </section>
+<main id="ui">
+  <svg id="antler" viewBox="0 0 200 120" aria-hidden="true"></svg>
+  <h1 aria-label="鹿雨森"><span style="--i:0">鹿</span><span style="--i:1">雨</span><span style="--i:2">森</span></h1>
+  <p class="en fade" style="--d:3s">Silvarain: Silent Antler of Silvarain</p>
+  <div class="rule fade" style="--d:3.3s"></div>
+  <p class="tag fade" style="--d:3.6s">在霧未散去的地方，仍保留著某些聲音</p>
+  <nav class="menu fade" style="--d:4.4s">
+    <button id="start" class="btn primary" type="button">踏入霧中</button>
+    <button id="leave" class="btn ghost" type="button">逃離霧中</button>
+  </nav>
+</main>
 
-  <!-- 區塊 4：體驗入口 -->
-  <section class="enter">
-    <a href="./world/silvarain.html" target="_blank" class="enter-link">
-      進入 Silvarain →
-    </a>
-  </section>
+<p class="hint fade" style="--d:5.5s">建議戴上耳機</p>
+<div id="toast" role="status"></div>
 
-  <!-- 區塊 5：基本資訊 -->
-  <section class="info">
-    <p>章節一 · 試作版</p>
-    <p>敘事 / 世界觀體驗</p>
-    <p>鹿雨森製作組</p>
-  </section>
+<script>
+/* ========== 設定：把網址填在這裡 ========== */
+const CONFIG = {
+  gameUrl: '',   // 「踏入霧中」之後要前往的遊戲頁，例如 'game.html'。留空 = 只播放轉場動畫
+  homeUrl: ''    // 「逃離霧中」要前往的官網，例如 'https://your-site.com'。留空 = 顯示「尚未開放」
+};
+/* ======================================== */
 
+const $ = id => document.getElementById(id);
+const seeded = s => () => (s = s * 16807 % 2147483647) / 2147483647;
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+const cv = {back:$('back'), fog:$('fog'), front:$('front'), rain:$('rain')};
+const cx = {}; for (const k in cv) cx[k] = cv[k].getContext('2d');
+let W, H, px = 0, py = 0, tx = 0, ty = 0;
+let boost = 1, boostT = 1, rainK = 1, rainT = 1;
+
+/* ---------- 森林剪影（只畫一次） ---------- */
+function pine(c, x, b, h, w) {
+  const t = 6, p = [];
+  for (let i = 1; i <= t; i++) { const y = b - h + h * .92 * i / t, hw = w * i / t / 2; p.push([hw, y], [hw * .45, y - h * .035]); }
+  c.beginPath(); c.moveTo(x, b - h);
+  p.forEach(q => c.lineTo(x + q[0], q[1]));
+  c.lineTo(x + w * .03, b); c.lineTo(x - w * .03, b);
+  p.reverse().forEach(q => c.lineTo(x - q[0], q[1]));
+  c.closePath(); c.fill();
+}
+function layer(c, r, base, hMin, hMax, col) {
+  c.fillStyle = col; const b = H * base;
+  for (let x = -40; x < W + 40;) {
+    const h = H * (hMin + r() * (hMax - hMin));
+    pine(c, x, b + H * .02, h, h * (.3 + r() * .12));
+    x += h * (.1 + r() * .16);
+  }
+  c.fillRect(0, b, W, H - b);
+}
+function haze(c, y0, rgb, a) {
+  const g = c.createLinearGradient(0, H * y0, 0, H);
+  g.addColorStop(0, `rgba(${rgb},0)`); g.addColorStop(1, `rgba(${rgb},${a})`);
+  c.fillStyle = g; c.fillRect(0, H * y0, W, H * (1 - y0));
+}
+function drawForest() {
+  const b = cx.back, f = cx.front, r = seeded(11);
+  let g = b.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#081315'); g.addColorStop(.55, '#173433'); g.addColorStop(1, '#0b1b1c');
+  b.fillStyle = g; b.fillRect(0, 0, W, H);
+  g = b.createRadialGradient(W * .5, H * .3, 0, W * .5, H * .3, H * .6);
+  g.addColorStop(0, 'rgba(205,232,220,.32)'); g.addColorStop(1, 'rgba(205,232,220,0)');
+  b.fillStyle = g; b.fillRect(0, 0, W, H);
+  layer(b, r, .70, .16, .30, '#1d3b3a');
+  haze(b, .45, '150,190,182', .3);
+  layer(b, r, .82, .22, .40, '#10272a');
+  haze(b, .62, '110,150,146', .24);
+  f.clearRect(0, 0, W, H); f.fillStyle = '#050d0e';
+  for (let s = 0; s < 2; s++) for (let x = -30; x < W * .24;) {
+    const h = H * (.5 + r() * .45) * (1 - x / (W * .36));
+    pine(f, s ? W - x : x, H * 1.05, h, h * (.34 + r() * .1));
+    x += H * .05 * (.6 + r());
+  }
+  g = f.createLinearGradient(0, H * .9, 0, H);
+  g.addColorStop(0, 'rgba(5,13,14,0)'); g.addColorStop(1, 'rgba(5,13,14,.95)');
+  f.fillStyle = g; f.fillRect(0, H * .9, W, H * .1);
+}
+
+/* ---------- 霧 ---------- */
+let puffs = [], spr;
+function initFog() {
+  spr = document.createElement('canvas'); spr.width = spr.height = 256;
+  const g = spr.getContext('2d'), gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(200,225,218,.55)'); gr.addColorStop(.5, 'rgba(170,205,198,.22)'); gr.addColorStop(1, 'rgba(170,205,198,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  puffs = Array.from({length: reduce ? 10 : 24}, () => ({
+    x: Math.random() * W, y: H * (.25 + Math.random() * .7), s: H * (.25 + Math.random() * .35),
+    v: (.08 + Math.random() * .25) * (Math.random() < .7 ? 1 : -1), a: .25 + Math.random() * .5, p: Math.random() * 6
+  }));
+}
+function drawFog(t) {
+  const c = cx.fog; c.clearRect(0, 0, W, H);
+  for (const p of puffs) {
+    p.x += p.v; const m = p.s * 1.4;
+    if (p.x > W + m) p.x = -m; if (p.x < -m) p.x = W + m;
+    c.globalAlpha = Math.min(1, p.a * (.7 + .3 * Math.sin(t / 4000 + p.p)) * boost);
+    c.drawImage(spr, p.x - m, p.y - p.s * .5, m * 2, p.s);
+  }
+  c.globalAlpha = 1;
+}
+
+/* ---------- 雨、漣漪、螢火 ---------- */
+let drops = [], rips = [], flies = [], glowSpr;
+const newDrop = init => { const z = Math.random(); return {x: Math.random() * (W + 200) - 100, y: init ? Math.random() * H : -40, z, l: 14 + z * 26, v: 10 + z * 16, gy: H * (.86 + Math.random() * .14)}; };
+function initRain() {
+  drops = Array.from({length: Math.min(reduce ? 120 : 320, Math.floor(W / 4))}, () => newDrop(true));
+  flies = Array.from({length: reduce ? 10 : 28}, () => ({x: Math.random() * W, y: H * (.35 + Math.random() * .6), a: Math.random() * 6, s: .5 + Math.random() * 1.5, r: Math.random() * 6.28}));
+  glowSpr = document.createElement('canvas'); glowSpr.width = glowSpr.height = 64;
+  const g = glowSpr.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(210,255,215,.95)'); gr.addColorStop(.25, 'rgba(150,235,190,.4)'); gr.addColorStop(1, 'rgba(150,235,190,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+}
+function drawRain(t) {
+  const c = cx.rain; c.clearRect(0, 0, W, H);
+  const far = new Path2D(), near = new Path2D(), wind = .2;
+  for (const d of drops) {
+    d.y += d.v * rainK; d.x += d.v * wind * rainK;
+    const P = d.z < .5 ? far : near;
+    P.moveTo(d.x, d.y); P.lineTo(d.x - d.l * wind, d.y - d.l);
+    if (d.y > d.gy) {
+      if (d.z > .45 && rips.length < 40) rips.push({x: d.x, y: d.gy, r: 1, a: .1 + d.z * .3});
+      Object.assign(d, newDrop(false));
+    }
+  }
+  c.lineCap = 'round';
+  c.strokeStyle = 'rgba(196,224,230,.15)'; c.lineWidth = .7; c.stroke(far);
+  c.strokeStyle = 'rgba(206,232,236,.34)'; c.lineWidth = 1.1; c.stroke(near);
+  c.strokeStyle = '#c8e6e6';
+  for (let i = rips.length - 1; i >= 0; i--) {
+    const p = rips[i]; p.r += .55; p.a -= .008;
+    if (p.a <= 0) { rips.splice(i, 1); continue; }
+    c.globalAlpha = p.a; c.beginPath(); c.ellipse(p.x, p.y, p.r * 2.4, p.r * .6, 0, 0, 6.283); c.lineWidth = .8; c.stroke();
+  }
+  c.globalAlpha = 1; c.globalCompositeOperation = 'lighter';
+  for (const f of flies) {
+    f.r += .01; f.x += Math.sin(f.r * .7 + f.a) * .35; f.y += Math.cos(f.r * .5) * .25 - .03;
+    if (f.y < H * .3) f.y = H * .95; if (f.x < 0) f.x = W; if (f.x > W) f.x = 0;
+    const k = .5 + .5 * Math.sin(t / 900 * f.s + f.a), sz = 12 + f.s * 9;
+    c.globalAlpha = k * k * .9; c.drawImage(glowSpr, f.x - sz, f.y - sz, sz * 2, sz * 2);
+  }
+  c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
+}
+
+/* ---------- 主迴圈與視差 ---------- */
+function frame(t) {
+  boost += (boostT - boost) * .03; rainK += (rainT - rainK) * .03;
+  px += (tx - px) * .05; py += (ty - py) * .05;
+  drawFog(t); drawRain(t);
+  cv.back.style.transform = `translate(${px * -12}px,${py * -8}px)`;
+  cv.fog.style.transform = `translate(${px * -26}px,${py * -10}px)`;
+  cv.front.style.transform = `translate(${px * -30}px,${py * -14}px)`;
+  cv.rain.style.transform = `translate(${px * -18}px,${py * -8}px)`;
+  requestAnimationFrame(frame);
+}
+addEventListener('pointermove', e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; });
+function size() {
+  W = innerWidth * 1.08; H = innerHeight * 1.08;
+  for (const k in cv) { cv[k].width = W * dpr; cv[k].height = H * dpr; cx[k].setTransform(dpr, 0, 0, dpr, 0, 0); }
+  drawForest(); initFog(); initRain();
+}
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 150); });
+size(); requestAnimationFrame(frame);
+
+/* ---------- 鹿角（逐筆生長） ---------- */
+(function () {
+  const r = seeded(5), P = [];
+  function br(x, y, a, l, d) {
+    const ex = x + Math.cos(a) * l, ey = y + Math.sin(a) * l, qx = x + Math.cos(a - .4) * l * .55, qy = y + Math.sin(a - .4) * l * .55;
+    P.push(`M${x.toFixed(1)} ${y.toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`);
+    if (d > 0) { br(ex, ey, a + .12 + (r() - .5) * .2, l * .8, d - 1); br(x + (ex - x) * .55, y + (ey - y) * .55, a + .75 + (r() - .5) * .25, l * .5, d - 1); }
+    if (d > 1) br(x + (ex - x) * .3, y + (ey - y) * .3, a - .7, l * .42, d - 2);
+  }
+  br(0, 0, -Math.PI / 2 - .55, 34, 3);
+  const g = s => `<g transform="translate(100 112)${s}">${P.map(d => `<path d="${d}"/>`).join('')}</g>`;
+  const svg = $('antler'); svg.innerHTML = g('') + g(' scale(-1 1)');
+  svg.querySelectorAll('path').forEach((p, i) => {
+    const n = p.getTotalLength();
+    p.style.strokeDasharray = n; p.style.strokeDashoffset = n;
+    p.style.transition = `stroke-dashoffset 2.2s ease ${.2 + (i % P.length) * .07}s`;
+  });
+  setTimeout(() => svg.querySelectorAll('path').forEach(p => p.style.strokeDashoffset = 0), 60);
+})();
+
+/* ---------- 雨聲（Web Audio 合成，不需任何音檔） ---------- */
+const snd = {on: false};
+function noise(A, brown) {
+  const n = A.sampleRate * 3, b = A.createBuffer(1, n, A.sampleRate), d = b.getChannelData(0); let l = 0;
+  for (let i = 0; i < n; i++) { const w = Math.random() * 2 - 1; if (brown) { l = (l + .02 * w) / 1.02; d[i] = l * 3.5; } else d[i] = w; }
+  const s = A.createBufferSource(); s.buffer = b; s.loop = true; s.start(); return s;
+}
+function audioInit() {
+  const A = snd.ac = new (window.AudioContext || window.webkitAudioContext)();
+  snd.master = A.createGain(); snd.master.gain.value = 0; snd.master.connect(A.destination);
+  const chain = (src, type, freq, q, gain) => { const f = A.createBiquadFilter(), g = A.createGain(); f.type = type; f.frequency.value = freq; f.Q.value = q; g.gain.value = gain; src.connect(f).connect(g).connect(snd.master); };
+  chain(noise(A), 'bandpass', 3200, .4, .5);
+  chain(noise(A, true), 'lowpass', 380, 1, 1.1);
+}
+function thunder() {
+  const A = snd.ac, s = noise(A, true), f = A.createBiquadFilter(), g = A.createGain(), t = A.currentTime + 1.2;
+  f.type = 'lowpass'; f.frequency.value = 160;
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1.2, t + .4); g.gain.exponentialRampToValueAtTime(.001, t + 3.5);
+  s.connect(f).connect(g).connect(snd.master); s.stop(t + 4);
+}
+$('sound').onclick = e => {
+  if (!snd.ac) audioInit();
+  snd.on = !snd.on; snd.ac.resume();
+  snd.master.gain.setTargetAtTime(snd.on ? .35 : 0, snd.ac.currentTime, .6);
+  e.currentTarget.textContent = '雨聲 · ' + (snd.on ? '開' : '關');
+  e.currentTarget.setAttribute('aria-pressed', snd.on);
+};
+
+/* ---------- 遠方閃電 ---------- */
+function lightning() {
+  if (!reduce && !document.hidden) {
+    $('flash').animate([{opacity: 0}, {opacity: .22}, {opacity: .04}, {opacity: .15}, {opacity: 0}], {duration: 1100});
+    if (snd.on) thunder();
+  }
+  setTimeout(lightning, 9000 + Math.random() * 14000);
+}
+if (!reduce) setTimeout(lightning, 6000);
+
+/* ---------- 按鈕 ---------- */
+let tt;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 2600); }
+
+$('start').onclick = () => {
+  document.body.classList.add('entering'); boostT = 2.4; rainT = 1.8;
+  setTimeout(() => {
+    window.dispatchEvent(new CustomEvent('silvarain:start'));
+    if (CONFIG.gameUrl) { location.href = CONFIG.gameUrl; return; }
+    document.body.classList.remove('entering'); boostT = 1; rainT = 1;
+    toast('遊戲場景尚未連接');
+  }, 2400);
+};
+$('leave').onclick = () => {
+  if (CONFIG.homeUrl) location.href = CONFIG.homeUrl;
+  else toast('官方網站尚未開放');
+};
+</script>
 </body>
-
 </html>
