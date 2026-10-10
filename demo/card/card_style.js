@@ -201,9 +201,118 @@
     else pulse("player", "card-protect");
     flash(card.meta?.kind === "attack" ? "attack" : "heal");
   }
-  function enemyActed(action) {
-    pulse(action === "attack" ? "player" : "enemy", action === "attack" ? "card-impact" : "card-protect");
-    flash(action === "attack" ? "attack" : "heal");
+  // Boss 行動展示只讀取軍火庫回傳的 action / result，不計算任何戰鬥數值。
+  // 場景回報與回合動畫保留在本專案；不向軍火庫加入私有規則。
+  let enemyReport = null;
+  let enemyFxGeneration = 0;
+  const enemyParticles = new Set();
+  function installEnemyStatus() {
+    const panel = document.querySelector("#battle .scb-enemy-panel");
+    if (!panel || enemyReport?.isConnected) return;
+    enemyReport = document.createElement("p");
+    enemyReport.className = "silva-enemy-report";
+    enemyReport.setAttribute("role", "status");
+    enemyReport.setAttribute("aria-live", "polite");
+    enemyReport.textContent = "迷霧之影正注視著你。";
+    panel.append(enemyReport);
+  }
+  function enemyMessage(message, mode = "idle") {
+    installEnemyStatus();
+    if (!enemyReport) return;
+    enemyReport.dataset.mode = mode;
+    enemyReport.textContent = message;
+  }
+  function clearEnemyEffects() {
+    enemyFxGeneration += 1;
+    enemyParticles.forEach(particle => particle.remove());
+    enemyParticles.clear();
+    document.querySelector("#battle .scb-enemy-panel")?.classList.remove("silva-boss-ready", "silva-boss-attack", "silva-boss-guard", "silva-boss-charge");
+    document.querySelector("#battle .scb-player-panel")?.classList.remove("silva-player-struck");
+  }
+  async function enemyWindup() {
+    clearEnemyEffects();
+    enemyMessage("迷霧之影正在凝聚力量……", "windup");
+    const panel = document.querySelector("#battle .scb-enemy-panel");
+    panel?.classList.add("silva-boss-ready");
+    if (!reduceMotion.matches) await new Promise(resolve => setTimeout(resolve, 660));
+  }
+  function createEnemyParticle(target, text, type) {
+    if (!target || reduceMotion.matches) return null;
+    const rect = target.getBoundingClientRect();
+    const mark = document.createElement("span");
+    mark.className = `silva-enemy-number silva-enemy-number--${type}`;
+    mark.textContent = text;
+    mark.setAttribute("aria-hidden", "true");
+    mark.style.left = `${rect.left + rect.width / 2}px`;
+    mark.style.top = `${rect.top + rect.height / 2}px`;
+    document.body.append(mark);
+    enemyParticles.add(mark);
+    void waitAnimation(mark, [
+      { transform: "translate(-50%,-40%) scale(.78)", opacity: 0 },
+      { transform: "translate(-50%,-85%) scale(1.14)", opacity: 1, offset: .3 },
+      { transform: "translate(-50%,-150%) scale(1)", opacity: 0 }
+    ], { duration: 1050, fill: "forwards", easing: "ease-out" }).finally(() => {
+      enemyParticles.delete(mark); mark.remove();
+    });
+    return mark;
+  }
+  async function enemyActed(action, result = {}) {
+    const generation = enemyFxGeneration;
+    installEnemyStatus();
+    const boss = document.querySelector("#battle .scb-enemy-panel");
+    const hero = document.querySelector("#battle .scb-player-panel");
+    boss?.classList.remove("silva-boss-ready");
+    if (action === "attack") {
+      const damage = result.damage || {};
+      const hpLost = Number(damage.damage || 0);
+      const shieldLost = Number(damage.absorbed || 0);
+      const loss = hpLost ? `−${hpLost} HP` : "0 HP";
+      const blocked = shieldLost ? `・護盾抵擋 ${shieldLost}` : "";
+      enemyMessage(`霧影襲擊！${loss}${blocked}`, "attack");
+      boss?.classList.add("silva-boss-attack");
+      const origin = document.querySelector("#battle .silva-foe-eyes") || boss;
+      const destination = document.querySelector("#battle .scb-player-panel .scb-visual") || hero;
+      if (!reduceMotion.matches && origin && destination) {
+        const a = origin.getBoundingClientRect();
+        const b = destination.getBoundingClientRect();
+        const line = document.createElement("span");
+        line.className = "silva-enemy-strike";
+        line.setAttribute("aria-hidden", "true");
+        line.style.left = `${a.left + a.width / 2}px`;
+        line.style.top = `${a.top + a.height / 2}px`;
+        document.body.append(line);
+        enemyParticles.add(line);
+        await waitAnimation(line, [
+          { transform: "translate(-50%,-50%) scale(.35) rotate(-24deg)", opacity: .12 },
+          { transform: `translate(calc(-50% + ${(b.left + b.width/2 - a.left - a.width/2) *.5}px),calc(-50% + ${(b.top + b.height/2 - a.top - a.height/2) *.5}px)) scale(.95) rotate(14deg)`, opacity: .9, offset: .52 },
+          { transform: `translate(calc(-50% + ${b.left + b.width/2 - a.left - a.width/2}px),calc(-50% + ${b.top + b.height/2 - a.top - a.height/2}px)) scale(1.3) rotate(-8deg)`, opacity: 0 }
+        ], { duration: 520, fill: "forwards", easing: "cubic-bezier(.18,.76,.39,1)" });
+        line.remove(); enemyParticles.delete(line);
+      }
+      if (generation !== enemyFxGeneration) return;
+      hero?.classList.add("silva-player-struck");
+      if (hpLost > 0) createEnemyParticle(hero, `−${hpLost} HP`, "hit");
+      else if (shieldLost > 0) createEnemyParticle(hero, `護盾 −${shieldLost}`, "block");
+      else createEnemyParticle(hero, "未受傷害", "block");
+      pulse("player", "card-impact");
+      flash("attack");
+    } else if (action === "guard") {
+      const amount = Number(result.added || 0);
+      boss?.classList.add("silva-boss-guard");
+      enemyMessage(`迷霧結盾・護盾 +${amount}`, "guard");
+      createEnemyParticle(boss, `護盾 +${amount}`, "guard");
+      pulse("enemy", "card-protect");
+      flash("heal");
+    } else if (action === "charge") {
+      boss?.classList.add("silva-boss-charge");
+      enemyMessage(`迷霧蓄勢・目前蓄力 ${Number(result.value || 0)}`, "charge");
+      createEnemyParticle(boss, "蓄力中", "charge");
+      flash("heal");
+    }
+    if (!reduceMotion.matches) await new Promise(resolve => setTimeout(resolve, 650));
+    if (generation !== enemyFxGeneration) return;
+    boss?.classList.remove("silva-boss-attack", "silva-boss-guard", "silva-boss-charge");
+    hero?.classList.remove("silva-player-struck");
   }
   function finished(result) {
     const stage = document.querySelector(".card-stage");
@@ -211,16 +320,20 @@
     flash(result === "won" ? "heal" : "attack");
   }
   function started() {
+    clearEnemyEffects();
+    enemyMessage("迷霧之影正注視著你。", "idle");
     const stage = document.querySelector(".card-stage");
     if (stage) stage.removeAttribute("data-result");
   }
 
   window.SilvarainCardUI = Object.freeze({
     renderPlayer, renderEnemy, renderCard, cardPlayed, enemyActed, finished, started,
-    installSelectionHint, setHint, flyCard
+    installSelectionHint, setHint, flyCard,
+    installEnemyStatus, enemyWindup, enemyActed, clearEnemyEffects
   });
   addEventListener("pagehide", () => {
     clearTimeout(effectTimeout);
+    clearEnemyEffects();
     flights.forEach(node => node.remove());
     flights.clear();
     instances.forEach(instance => { try { instance.destroy(); } catch (_) { /* already destroyed */ } });

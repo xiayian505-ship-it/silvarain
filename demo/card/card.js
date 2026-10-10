@@ -42,6 +42,9 @@
   let selected = null;
   let playing = false;
   let playGeneration = 0;
+  let enemyBusy = false;
+  let enemyGeneration = 0;
+  let pendingEnemyVisual = null;
   let battle;
 
   function hint(text) {
@@ -63,6 +66,15 @@
     button.classList.add("silva-selected");
     button.setAttribute("aria-pressed", "true");
     hint(`已選取「${button.querySelector(".scb-card-name")?.textContent || "卡牌"}」｜再點一次出牌`);
+  }
+
+  function cancelEnemySequence() {
+    // 重新開始時廢止等待中的動畫，絕不把舊回合的攻擊提交到新戰局。
+    enemyGeneration += 1;
+    enemyBusy = false;
+    pendingEnemyVisual = null;
+    battleRoot.classList.remove("silva-enemy-busy");
+    window.SilvarainCardUI?.clearEnemyEffects();
   }
 
   function resetInteraction() {
@@ -108,28 +120,66 @@
     }
   }
 
+  // 軍火庫預設的 endTurn() 是同步結算：Boss 雖會造成傷害，卻會瞬間回到玩家回合。
+  // 由宿主攔住按鈕，先呈現出手動作，之後仍只呼叫官方 endTurn()。
+  async function commitEnemyTurn() {
+    if (!battleReady || enemyBusy || playing) return;
+    const current = battle.getState();
+    if (current.status !== "playing" || current.turn !== "player") return;
+
+    enemyBusy = true;
+    const generation = ++enemyGeneration;
+    battleRoot.classList.add("silva-enemy-busy");
+    deselect({ quiet: true });
+    pendingEnemyVisual = null;
+    try {
+      await window.SilvarainCardUI?.enemyWindup();
+      if (generation !== enemyGeneration) return;
+      const result = battle.endTurn();
+      if (result.ended && pendingEnemyVisual) await pendingEnemyVisual;
+    } catch (error) {
+      if (generation === enemyGeneration) {
+        console.error("鹿雨森：敵方行動展示失敗", error);
+        hint("敵方回合發生問題，請再試一次。");
+      }
+    } finally {
+      if (generation === enemyGeneration) {
+        enemyBusy = false;
+        pendingEnemyVisual = null;
+        battleRoot.classList.remove("silva-enemy-busy");
+      }
+    }
+  }
+
   let battleReady = false;
   // capture 階段先阻止軍火庫原本的「一點即出牌」click handler。
   // 完整保留軍火庫自身 disable、energy、effect、AI、回合管理。
   battleRoot.addEventListener("click", event => {
+    const endButton = event.target.closest(".scb-end-turn");
+    if (endButton && battleRoot.contains(endButton)) {
+      event.stopPropagation();
+      event.preventDefault();
+      if (!endButton.disabled) void commitEnemyTurn();
+      return;
+    }
     const button = event.target.closest(".scb-card");
     if (button && battleRoot.contains(button)) {
       event.stopPropagation();
       event.preventDefault();
-      if (!battleReady || playing || button.disabled) return;
+      if (!battleReady || playing || enemyBusy || button.disabled) return;
       if (button === selected) void commit(button);
       else select(button);
       return;
     }
-    if (!playing) deselect();
+    if (!playing && !enemyBusy) deselect();
   }, true);
 
   // 點卡牌以外的區域或按 Escape 都可以取消當前選擇。
   document.addEventListener("click", event => {
-    if (!battleRoot.contains(event.target) && !playing) deselect({ quiet: true });
+    if (!battleRoot.contains(event.target) && !playing && !enemyBusy) deselect({ quiet: true });
   });
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && !playing && selected) {
+    if (event.key === "Escape" && !playing && !enemyBusy && selected) {
       const previous = selected;
       deselect();
       previous?.focus();
@@ -153,7 +203,10 @@
       },
       callbacks: {
         onCardPlay({ card }) { window.SilvarainCardUI?.cardPlayed(card); },
-        onEnemyAction({ action }) { window.SilvarainCardUI?.enemyActed(action); },
+        onEnemyAction({ action, result }) {
+          // onEnemyAction 會在軍火庫完成真正結算後觸發；只用結果繪製傷害回饋。
+          pendingEnemyVisual = window.SilvarainCardUI?.enemyActed(action, result);
+        },
         onWin() { window.SilvarainCardUI?.finished("won"); },
         onLose() { window.SilvarainCardUI?.finished("lost"); },
         onStart() { resetInteraction(); window.SilvarainCardUI?.started(); },
@@ -170,12 +223,14 @@
 
   battleReady = true;
   window.SilvarainCardUI?.installSelectionHint();
+  window.SilvarainCardUI?.installEnemyStatus();
   hint("點一下選牌，再點同一張出牌。點空白處取消。");
 
   restartButton.addEventListener("click", () => {
     if (!window.confirm("要重新開始這場霧林試煉嗎？目前的戰鬥進度會重置。")) return;
+    cancelEnemySequence();
     resetInteraction();
     battle.restart();
   });
-  addEventListener("pagehide", () => { resetInteraction(); battle.destroy(); }, { once: true });
+  addEventListener("pagehide", () => { cancelEnemySequence(); resetInteraction(); battle.destroy(); }, { once: true });
 })();

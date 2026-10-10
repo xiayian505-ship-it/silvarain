@@ -513,3 +513,78 @@ body { background: #081617; }
   #battle .scb-card.silva-selected { transition: none !important; }
   .silva-card-flight, .silva-card-flare { display: none !important; }
 }
+
+/* ===== Boss 回合動作：起手蓄勢／飛行攻擊／命中 HUD（戰鬥數值仍由軍火庫結算） ===== */
+#battle .scb-enemy-panel .silva-enemy-report {
+  grid-row: 6; width: min(360px, 95%); min-height: 23px;
+  margin: 5px 0 0; padding: 4px 8px;
+  font-size: clamp(10px, 1.5vw, 12px); line-height: 1.5;
+  letter-spacing: .065em; text-align: center; color: #cae2d9;
+  text-shadow: 0 1px 8px rgba(0,0,0,.9);
+  background: rgba(9,27,30,.58); border: 1px solid rgba(184,224,211,.14);
+}
+#battle .silva-enemy-report[data-mode="windup"],
+#battle .silva-enemy-report[data-mode="attack"] { color:#f7d7e5; border-color:rgba(225,159,189,.42); }
+#battle .silva-enemy-report[data-mode="guard"],
+#battle .silva-enemy-report[data-mode="charge"] { color:#d1f4e3; border-color:rgba(166,237,211,.42); }
+#battle .scb-enemy-panel.silva-boss-ready .silva-foe-eyes {
+  filter: drop-shadow(0 0 17px #f3c0eb) brightness(1.65);
+}
+#battle .scb-enemy-panel.silva-boss-ready .silva-foe {
+  animation: silva-boss-windup .65s ease-in-out both;
+}
+#battle .scb-enemy-panel.silva-boss-attack .silva-foe {
+  animation: silva-boss-lunge .52s ease-in both;
+}
+#battle .scb-enemy-panel.silva-boss-guard .silva-foe {
+  filter: drop-shadow(0 0 28px rgba(141,235,198,.76));
+}
+#battle .scb-enemy-panel.silva-boss-charge .silva-foe {
+  filter: drop-shadow(0 0 35px rgba(213,174,232,.88));
+}
+#battle .scb-player-panel.silva-player-struck {
+  animation: silva-hero-hit .5s ease-out;
+}
+@keyframes silva-boss-windup {
+  0% { transform: translateY(0) scale(1); }
+  58% { transform: translateY(-15px) scale(1.07); }
+  100% { transform: translateY(-5px) scale(1.03); }
+}
+@keyframes silva-boss-lunge {
+  0% { transform: translateY(-5px) scale(1.03); }
+  45% { transform: translateY(8px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes silva-hero-hit {
+  0%,100% { transform:translateX(0); filter:none; }
+  25% { transform:translateX(-6px); filter:drop-shadow(0 0 18px rgba(238,134,170,.88)); }
+  50% { transform:translateX(5px); }
+  70% { transform:translateX(-2px); }
+}
+.silva-enemy-strike {
+  position:fixed; z-index:9998; width: 75px; height: 18px;
+  border-radius: 60% 20%; pointer-events:none;
+  background: linear-gradient(90deg, transparent, rgba(225,159,218,.46) 15%, #f3d4f9 55%, rgba(197,135,208,.1));
+  box-shadow:0 0 25px rgba(230,146,229,.62), 0 0 12px #eac3f2;
+  transform-origin: center; will-change:transform,opacity;
+}
+.silva-enemy-number {
+  position:fixed; z-index:9999; pointer-events:none;
+  padding:5px 10px; border-radius:8px;
+  background:rgba(9,23,28,.91); border:1px solid rgba(242,170,203,.45);
+  color:#ffd7e5; text-shadow:0 0 8px rgba(234,135,179,.5);
+  font:700 clamp(13px, 3vw, 19px)/1.35 "Noto Serif TC",serif;
+  white-space:nowrap; box-shadow:0 4px 22px rgba(0,0,0,.5);
+}
+.silva-enemy-number--guard,.silva-enemy-number--charge,.silva-enemy-number--block {
+  color:#c5f6dc; border-color:rgba(155,235,197,.5);
+  text-shadow:0 0 8px rgba(128,242,199,.4);
+}
+#battle.silva-enemy-busy .scb-end-turn,
+#battle.silva-enemy-busy .scb-card { pointer-events:none; }
+@media (prefers-reduced-motion:reduce) {
+  #battle .scb-enemy-panel.silva-boss-ready .silva-foe,
+  #battle .scb-enemy-panel.silva-boss-attack .silva-foe,
+  #battle .scb-player-panel.silva-player-struck { animation:none!important; }
+  .silva-enemy-strike { display:none!important; }
+}
