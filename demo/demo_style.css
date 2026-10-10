@@ -145,3 +145,11 @@
 /* 第二款：三消 Demo，以更冷的雨藍點綴，仍保持鹿雨森的整體氣氛。 */
 .demo-category--match3 {background:radial-gradient(circle at 83% 15%,rgba(130,179,220,.16),transparent 42%),linear-gradient(132deg,rgba(10,33,38,.94),rgba(10,28,33,.88));}
 .demo-category--match3 .demo-category-label {color:#a9d7e0;}
+
+/* 第三款：Suika / 霧核鍊成。保持大廳分類與原先兩款共存。 */
+.demo-category--suika {
+  background:
+    radial-gradient(circle at 80% 12%, rgba(181, 161, 216, .18), transparent 42%),
+    linear-gradient(135deg, rgba(19, 33, 38, .94), rgba(13, 28, 32, .88));
+}
+.demo-category--suika .demo-category-label { color: #d5c3eb; }
