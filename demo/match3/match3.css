@@ -1,0 +1,64 @@
+/* 鹿雨森 / Match3：遊戲核心佈局、棋盤與 HUD。外觀由 match3_style.css 控制。 */
+.match3-main{width:min(1000px,calc(100% - 32px));padding-top:65px;padding-bottom:90px}
+.match3-main .demo-breadcrumb{margin-bottom:26px}
+.match3-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:25px}
+.match3-heading h1{margin:7px 0;color:#eef8f1;font-size:clamp(34px,6.5vw,60px);font-weight:500;letter-spacing:.17em}
+.match3-heading h1 span{color:#bdddcf}
+.match3-heading p:not(.section-label){margin:6px 0 0;color:#b6d3c7;font-size:13px;line-height:1.9}
+.match3-heading .section-label{margin:0;color:#91b9a8;font-size:11px;letter-spacing:.22em}
+.m3-btn{flex:none;border:1px solid #81b09d;background:rgba(8,40,37,.8);padding:12px 15px;color:#f0fff5;cursor:pointer;font-size:12px;letter-spacing:.12em}
+.m3-btn:hover,.m3-btn:focus-visible{background:#1b4d46}
+.m3-arena{position:relative;overflow:hidden;border:1px solid rgba(173,219,199,.3);background:rgba(3,19,22,.68);box-shadow:0 18px 65px rgba(0,0,0,.3)}
+.m3-arena-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 24px;border-bottom:1px solid rgba(199,239,221,.12);font:italic 15px "Cormorant Garamond",Georgia,serif;letter-spacing:.16em;color:#b8dacc}
+.m3-boss-zone{position:relative;display:flex;flex-direction:column;align-items:center;min-height:302px;padding:8px 18px 13px;background:radial-gradient(ellipse at 50% 49%,rgba(114,155,147,.12),transparent 65%)}
+.m3-boss-caption{margin:10px 0;color:#97b8b1;font:italic 14px Georgia,serif;letter-spacing:.24em}
+.m3-boss-figure{position:relative;width:155px;height:185px;flex:none}
+.m3-boss-hud{position:relative;z-index:2;width:min(440px,93%);margin-top:-3px}
+.m3-hud-line{display:flex;justify-content:space-between;align-items:baseline;gap:10px;color:#e5f2ec;font-size:13px}
+.m3-hud-line strong{font-size:16px;letter-spacing:.15em;font-weight:500}
+.m3-numbers{font-variant-numeric:tabular-nums}
+.m3-meter{height:10px;overflow:hidden;border:1px solid rgba(231,255,244,.23);background:rgba(1,13,20,.88);margin:6px 0}
+.m3-meter>i{display:block;width:100%;height:100%;transition:width .36s ease}
+.m3-boss-details{display:flex;justify-content:space-between;gap:10px;color:#b9d6cc;font-size:12px}
+.m3-hit-float{position:absolute;top:115px;left:50%;transform:translate(-50%,-50%);z-index:5;pointer-events:none;font-size:30px;font-weight:bold;opacity:0}
+.m3-divider{text-align:center;color:#86bba7;border-top:1px solid rgba(164,214,190,.11);padding:11px 0 7px;font:italic 13px Georgia,serif;letter-spacing:.14em}
+.m3-game-zone{padding:10px 14px 12px;max-width:650px;margin:0 auto}
+.m3-battle-note{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#b7d4c8;max-width:508px;margin:0 auto 9px}
+.m3-board-wrap{max-width:508px;margin:0 auto;border:1px solid rgba(198,235,222,.25);padding:clamp(6px,2vw,12px);background:rgba(3,22,27,.85)}
+.m3-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:clamp(3px,.95vw,6px);width:100%;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
+.m3-cell{position:relative;display:grid;place-items:center;aspect-ratio:1;min-width:0;min-height:0;border:1px solid rgba(167,225,204,.17);background:rgba(28,60,65,.78);border-radius:9px;cursor:pointer;touch-action:none;color:inherit;font:inherit;padding:0;outline:none;transition:background .15s,border-color .15s,transform .15s}
+.m3-cell:focus-visible{outline:2px solid #ddfff0;outline-offset:2px}
+.m3-cell[disabled]{cursor:default}
+.m3-glyph{font-size:clamp(18px,3vw,28px);line-height:1;display:grid;place-items:center;width:100%;height:100%;font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.02em;filter:drop-shadow(0 3px 4px rgba(0,0,0,.36));text-shadow:0 0 12px rgba(218,245,232,.18)}
+.m3-cell[data-color="0"] .m3-glyph{color:#e8d8ff;text-shadow:0 0 12px rgba(231,202,255,.28)}
+.m3-cell[data-color="1"] .m3-glyph{color:#d4f2ec;text-shadow:0 0 12px rgba(171,240,231,.28)}
+.m3-cell[data-color="2"] .m3-glyph{color:#f5e8b9;text-shadow:0 0 12px rgba(255,230,155,.32)}
+.m3-cell[data-color="3"] .m3-glyph{color:#d8ecff;text-shadow:0 0 12px rgba(173,214,255,.28)}
+.m3-special{position:absolute;right:0;top:-3px;line-height:1;font-size:13px;color:#fff2c8;text-shadow:0 0 5px #071719,0 0 12px #afe5d4}
+.m3-sigil-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 12px;margin:11px auto 0;font-size:12px;color:#bad6cc}
+.m3-legend-item{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid rgba(182,225,209,.14);background:rgba(11,32,36,.48);line-height:1.2}
+.m3-legend-item span{opacity:.82;font-size:11px}
+.m3-legend-item--0{color:#efdfff}
+.m3-legend-item--1{color:#d9f3ef}
+.m3-legend-item--2{color:#f5e6af}
+.m3-legend-item--3{color:#ddeaff}
+.m3-combat-feedback{max-width:570px;margin:12px auto 2px;text-align:center;font-size:12px;line-height:1.7;color:#e0f0e9;min-height:23px}
+.m3-player-zone{padding:16px clamp(17px,4vw,34px) 20px;background:rgba(6,31,34,.89);border-top:1px solid rgba(176,224,206,.21)}
+.m3-player-title{display:flex;align-items:center;gap:9px;font-size:14px;color:#e7f7ee}
+.m3-player-title .m3-numbers{margin-left:auto}
+.m3-player-symbol{font-size:24px;color:#f5e6af}
+.m3-player-bottom{display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;color:#c2d8cf;font-size:12px;margin-top:12px}
+.m3-skill{margin-left:auto;padding:10px 14px;border:1px solid rgba(193,236,215,.64);background:rgba(51,100,82,.5);color:#e5ffed;cursor:pointer;font-size:12px;letter-spacing:.07em}
+.m3-skill[disabled]{opacity:.52;cursor:not-allowed}
+.m3-result{position:absolute;z-index:15;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:rgba(4,19,22,.88);text-align:center;padding:20px;backdrop-filter:blur(6px)}
+.m3-result[hidden],.m3-error[hidden]{display:none!important}
+.m3-result h2{font-size:clamp(27px,6vw,44px);font-weight:500;letter-spacing:.16em;margin:0;color:#effff2}
+.m3-result p{color:#d0e3dc;font-size:14px;line-height:2}
+.m3-error{padding:18px;margin-top:16px;background:#501b25;color:#fff}
+.m3-guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:23px 0}
+.m3-guide>div{padding:17px;border:1px solid rgba(186,224,206,.22);background:rgba(9,30,31,.6)}
+.m3-guide b{color:#d9f1e1;font-weight:500;font-size:13px}
+.m3-guide p{color:#accabc;line-height:1.9;font-size:12px;margin:10px 0 0}
+.m3-disclaimer{font-size:12px;line-height:2;color:#a9c8bb;text-align:center}
+@media(max-width:640px){.match3-main{width:calc(100% - 20px);padding:36px 0 65px}.match3-main .demo-breadcrumb{margin:0 4px 20px;font-size:11px}.match3-heading{padding:0 5px;align-items:center;gap:5px}.match3-heading h1{font-size:clamp(30px,8vw,42px);margin:3px 0;letter-spacing:.09em}.match3-heading p:not(.section-label){font-size:11px;line-height:1.55}.match3-heading .section-label{font-size:9px;letter-spacing:.12em}.m3-btn{padding:10px 9px;font-size:11px}.m3-arena-top{padding:10px 13px;font-size:11px}.m3-boss-zone{min-height:275px;padding:5px 10px 10px}.m3-boss-figure{width:145px;height:172px}.m3-boss-caption{font-size:12px}.m3-boss-hud{width:min(365px,95%)}.m3-game-zone{padding:10px 9px}.m3-cell{border-radius:6px}.m3-player-zone{padding:12px 14px 17px}.m3-guide{grid-template-columns:1fr;gap:9px}.m3-guide>div{padding:13px}.m3-guide p{margin:5px 0 0}.m3-sigil-legend{font-size:11px;gap:6px 8px}.m3-legend-item{padding:4px 8px}.m3-legend-item span{font-size:10px}}
+@media(max-width:365px){.m3-board-wrap{padding:5px}.m3-board{gap:3px}.m3-glyph{font-size:19px}.m3-special{font-size:11px}.m3-player-bottom{gap:8px}.m3-skill{font-size:11px;padding:9px}}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071719">
+  <meta name="description" content="鹿雨森遊戲 Demo：以三消符文對抗霧林 Boss。">
+  <title>霧林共鳴｜鹿雨森三消 Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+  <!-- 軍火庫僅透過 HTTPS 絕對路徑載入：不複製共用核心。 -->
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/ui/responsive.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/background/starfield.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/light/button_shine.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/line/gradient_divider.css">
+  <!-- 官網外層與三消各自外觀 -->
+  <link rel="stylesheet" href="../../index.css">
+  <link rel="stylesheet" href="../../index_style.css">
+  <link rel="stylesheet" href="../demo_style.css">
+  <link rel="stylesheet" href="./match3.css">
+  <link rel="stylesheet" href="./match3_style.css">
+  <script defer src="https://lib.stillnessbyslowly.com/effects/background/pine_forest.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/effects/background/fog.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/effects/background/rain.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/effects/background/starfield.js"></script>
+  <!-- 沿用原 Match3 已使用的五顆格子核心 -->
+  <script defer src="https://lib.stillnessbyslowly.com/game/grid/line_match.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/game/grid/gravity.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/game/grid/swap_search.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/game/grid/shuffle_until.js"></script>
+  <script defer src="https://lib.stillnessbyslowly.com/game/grid/chain_expand.js"></script>
+  <script defer src="./match3_style.js"></script>
+  <script defer src="./match3.js"></script>
+</head>
+<body>
+  <div class="scenery" aria-hidden="true">
+    <canvas id="forest"></canvas><canvas id="fog"></canvas>
+    <div id="fireflies" class="sbs-stars" data-count="20" data-color="#c6f6e0"><canvas></canvas></div>
+    <canvas id="weather"></canvas><div class="atmosphere"></div>
+  </div>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="../../index.html" aria-label="鹿雨森官網">
+        <svg class="brand-mark" viewBox="0 0 60 72" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M30 65C22 54 18 40 10 23M30 65C38 54 42 40 50 23M17 39L5 30M43 39L55 30M12 27L12 9M48 27L48 9M23 51L9 49M37 51L51 49"></path></svg>
+        <span class="brand-name"><span class="brand-zh">鹿雨森</span><span class="brand-en">Silvarain</span></span>
+      </a>
+      <nav class="nav-links" aria-label="網站導覽"><a class="nav-cta nav-cta--demo sbs-shine" href="../">Demo 大廳 ↗</a><a class="nav-cta sbs-shine" href="../card/">卡牌 Demo ↗</a></nav>
+    </div>
+  </header>
+  <main class="demo-main match3-main">
+    <nav class="demo-breadcrumb" aria-label="所在位置"><a href="../../index.html">鹿雨森官網</a><span>/</span><a href="../">遊戲 Demo</a><span>/</span><span aria-current="page">Match3</span></nav>
+    <div class="match3-heading"><div><p class="section-label">SILVARAIN / MATCH-3 EXPERIMENT 02</p><h1>霧林<span>共鳴</span></h1><p>雨滴落下，符文甦醒。讓每一次連鎖成為回應。</p></div><button id="restart" class="m3-btn sbs-shine" type="button">↻ 重新試煉</button></div>
+    <section class="m3-arena" aria-label="鹿雨森三消戰鬥" id="arena">
+      <div class="m3-arena-top"><span>02 / THE ENCOUNTER</span><span>三消戰鬥 · 測試原型</span></div>
+      <section class="m3-boss-zone" aria-label="迷霧之影，Boss">
+        <p class="m3-boss-caption">BOSS · THE VEILED ONE</p>
+        <div id="bossFigure" class="m3-boss-figure" aria-hidden="true"><i class="m3-boss-aura"></i><i class="m3-antler m3-antler--left"></i><i class="m3-antler m3-antler--right"></i><i class="m3-boss-cloak"></i><i class="m3-boss-face"></i><i class="m3-boss-eyes"></i><i class="m3-boss-floor"></i></div>
+        <div class="m3-boss-hud"><div class="m3-hud-line"><strong>迷霧之影</strong><span id="bossHpText" class="m3-numbers">160 / 160</span></div><div class="m3-meter m3-meter--boss"><i id="bossHpFill"></i></div><div class="m3-boss-details"><span id="bossShield">護盾 0</span><span id="bossCountdown">距離攻擊還有 3 步</span></div></div>
+        <div id="bossFloat" class="m3-hit-float" aria-live="polite"></div>
+      </section>
+      <div class="m3-divider" aria-hidden="true">✦　S I L V A R A I N　✦</div>
+      <section class="m3-game-zone" aria-label="三消符文棋盤">
+        <div class="m3-battle-note"><span id="turnStatus">旅人回合</span><span id="moveCount">已交換 0 次</span></div>
+        <div class="m3-board-wrap"><div id="board" class="m3-board" role="grid" aria-label="八乘八符文棋盤，點選或滑動交換相鄰格子"></div></div>
+        <div class="m3-sigil-legend" aria-label="符文說明"><span class="m3-legend-item m3-legend-item--0">✦ 樹影<span>傷害</span></span><span class="m3-legend-item m3-legend-item--1">◈ 雨幕<span>護盾</span></span><span class="m3-legend-item m3-legend-item--2">✧ 微光<span>靈息</span></span><span class="m3-legend-item m3-legend-item--3">☽ 雨聲<span>治療</span></span></div>
+        <div class="m3-combat-feedback" id="battleLog" role="status" aria-live="polite">交換相鄰符文，三個以上連成一線便會發動共鳴。</div>
+      </section>
+      <section class="m3-player-zone" aria-label="旅人狀態">
+        <div class="m3-player-title"><span class="m3-player-symbol">✧</span><strong>旅人</strong><span id="playerHpText" class="m3-numbers">90 / 90</span></div>
+        <div class="m3-meter m3-meter--player"><i id="playerHpFill"></i></div>
+        <div class="m3-player-bottom"><span id="playerShield">護盾 0</span><span id="playerEnergy">靈息 0 / 100</span><button id="skillBtn" class="m3-skill" type="button" disabled>✦ 森林共鳴（100）</button></div>
+      </section>
+      <div id="resultPanel" class="m3-result" hidden role="status" aria-live="polite"><h2 id="resultTitle"></h2><p id="resultDescription"></p><button id="resultRestart" class="m3-btn" type="button">再次踏入霧中</button></div>
+    </section>
+    <div id="engineError" class="m3-error" role="alert" hidden></div>
+    <section class="m3-guide" aria-label="試玩說明"><div><b>01 / 交換符文</b><p>點選兩個相鄰格子，或在手機上滑動。無效交換會退回，不扣行動。</p></div><div><b>02 / 連鎖與特殊符文</b><p>四連生成行列符文、五連生成星紋、T／L 生成爆裂符文；可點兩次觸發特殊符文。</p></div><div><b>03 / Boss 反擊</b><p>每三次有效行動，霧影便會反擊。用雨滴累積護盾，微光蓄滿時施放共鳴技能。</p></div></section>
+    <p class="m3-disclaimer">玩法、美術與數值皆為測試版本；此 Demo 尚未接入鹿雨森正式劇情或存檔。不新增音效，保留雨霧場景。</p>
+  </main>
+  <footer class="site-footer"><div class="footer-inner"><div><p class="footer-name">Silvarain · 鹿雨森</p><p class="footer-small">Match3 Demo｜霧林共鳴</p></div><a class="footer-link" href="https://stillnessbyslowly.com/" target="_blank" rel="noopener noreferrer">慢 慢 | Stillness by Slowly ↗</a></div></footer>
+</body>
+</html>
