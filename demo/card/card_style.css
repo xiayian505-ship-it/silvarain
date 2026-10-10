@@ -177,3 +177,339 @@ body { background: #081617; }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important; }
 }
+
+/* ==========================================================
+   戰場式排版 v2｜Boss 站在環境中，不再包進「卡牌資訊框」。
+   軍火庫只管戰鬥資料、回合、事件；本頁僅以 CSS Grid 重新陳列其 DOM。
+========================================================== */
+.card-main { width: min(1120px, calc(100% - 40px)); }
+.card-main .demo-breadcrumb { margin-bottom: 16px; }
+.card-main { padding-top: 37px; }
+.card-intro { min-height: 0; padding: 0 6px 16px; gap: 16px; }
+.card-intro .section-label { margin-bottom: 6px; font-size: 10px; }
+.card-intro h1 { font-size: clamp(35px, 4vw, 57px); line-height: 1.18; }
+.card-intro .fine-rule { margin: 12px 0; }
+.card-lead { margin: 0; line-height: 1.75; }
+.card-intro-sigil { width: 110px; height: 110px; }
+.card-intro-sigil .sigil-center { font-size: 52px; }
+.card-intro-sigil .sigil-orbit { inset: 15px; }
+.card-intro-sigil .sigil-caption { display: none; }
+.card-topline { margin: 9px 0 13px; }
+.card-stage { overflow: hidden; background: rgba(5, 18, 21, .24); border: 1px solid rgba(153, 218, 197, .29); }
+.card-stage-heading { padding: 12px 23px; background: linear-gradient(90deg, rgba(4, 20, 23, .87), rgba(11, 39, 38, .65)); }
+.card-stage-heading h2 { font-size: 16px; }
+.card-stage-inner {
+  padding: 0 22px 20px;
+  background:
+    radial-gradient(ellipse 28% 36% at 50% 26%, rgba(189, 217, 206, .23), transparent 100%),
+    radial-gradient(ellipse 42% 28% at 50% 54%, rgba(33, 90, 76, .30), transparent 100%),
+    linear-gradient(180deg, rgba(8, 31, 34, .22), rgba(3, 17, 18, .52) 57%, rgba(2, 12, 15, .89));
+}
+.card-stage-inner::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 8% at 50% 47%, rgba(193, 232, 220, .12), transparent 75%),
+    linear-gradient(90deg, rgba(3, 11, 16, .51), transparent 25%, transparent 75%, rgba(3, 11, 16, .51));
+}
+.card-ornament.top,.card-ornament.bottom { display: none; }
+#battle .slowly-card-battle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "turn turn"
+    "boss boss"
+    "hand hand"
+    "player controls"
+    "resources controls"
+    "status status";
+  gap: 0 13px;
+  position: relative;
+  z-index: 1;
+}
+/* 把軍火庫 Arena 的三個子元素提升到宿主 Grid 排列；不搬 DOM、不複製核心。 */
+#battle .scb-arena { display: contents; }
+#battle .scb-combatant::after { content: none; }
+#battle .scb-center {
+  grid-area: turn; display: flex; align-items: center; justify-content: center;
+  justify-self: stretch; align-self: stretch;
+  min-width: 0; min-height: 45px; gap: 12px; padding: 8px 0;
+  border-bottom: 1px solid rgba(184, 232, 212, .09);
+  background: linear-gradient(90deg, transparent, rgba(16, 49, 47, .32), transparent);
+}
+#battle .scb-center::before,#battle .scb-center::after { content: none; }
+#battle .scb-round { color: #d8ebdf; font-size: 22px; }
+#battle .scb-turn { color: #bddbcc; font-size: 12px; }
+/* 敵人：透明、無邊框、無卡片底色，僅保留細小的血量 HUD。 */
+#battle .scb-enemy-panel {
+  grid-area: boss; position: relative; isolation: isolate;
+  display: grid; grid-template-rows: auto auto auto auto auto;
+  justify-items: center; align-content: end;
+  width: 100%; min-height: clamp(310px, 36vw, 415px);
+  margin: 0; padding: 11px 12px 28px;
+  border: 0; border-radius: 0; background: none; box-shadow: none;
+  text-align: center; overflow: visible;
+}
+#battle .scb-enemy-panel::before {
+  content: ""; position: absolute; inset: 9% 15% 16%; z-index: -1;
+  background: radial-gradient(ellipse at 50% 48%, rgba(177, 172, 195, .15), transparent 60%);
+  pointer-events: none;
+}
+#battle .scb-enemy-panel .scb-visual {
+  grid-row: 1; min-height: 0; margin: 0; width: 100%; overflow: visible;
+}
+#battle .scb-enemy-panel .scb-combatant-header {
+  grid-row: 2; display: flex; flex-direction: row; justify-content: center; align-items: center;
+  gap: 15px; margin: -2px 0 8px; position: relative;
+}
+#battle .scb-enemy-panel .scb-combatant-header::before { content: none; }
+#battle .scb-enemy-panel .scb-name {
+  color: #f1f3f3; font-size: clamp(16px, 2vw, 21px); letter-spacing: .27em;
+  text-shadow: 0 2px 12px rgba(4, 8, 14, .86);
+}
+#battle .scb-enemy-panel .scb-shield-label { color: #cfbdd9; font-size: 11px; }
+#battle .scb-enemy-panel .scb-stat-row {
+  grid-row: 3; width: min(340px, 76%); color: #dce7e1; margin: 0 0 4px;
+  font-size: 11px; text-shadow: 0 1px 7px #071014;
+}
+#battle .scb-enemy-panel .scb-meter {
+  grid-row: 4; width: min(340px, 76%); height: 8px; margin: 0;
+  border: 1px solid rgba(205, 176, 210, .38); border-radius: 0;
+  background: rgba(5, 12, 21, .84); box-shadow: 0 2px 12px rgba(0,0,0,.65);
+}
+#battle .scb-enemy-panel .scb-charge { grid-row: 5; min-height: 17px; margin: 4px 0 0; }
+/* CSS 程式美術：測試用霧影，將來可在 renderEnemy() 換正式 IMG。 */
+.silva-foe { position: relative; width: clamp(170px, 24vw, 249px); height: clamp(194px, 26vw, 271px); margin: 0 auto; filter: drop-shadow(0 17px 18px rgba(0,0,0,.5)); animation: silva-foe-float 5.6s ease-in-out infinite; }
+.silva-foe-halo { position: absolute; inset: 0 -30%; background: radial-gradient(ellipse at 50% 52%, rgba(150, 171, 185, .22), transparent 54%); filter: blur(5px); }
+.silva-foe-antler { position: absolute; z-index: 1; top: 4%; left: 50%; width: 4px; height: 34%; transform-origin: bottom center; border-radius: 5px; background: linear-gradient(180deg, rgba(143, 177, 184, .68), rgba(65, 99, 111, .5)); box-shadow: 0 0 14px rgba(188, 224, 218, .19); }
+.silva-foe-antler::before,.silva-foe-antler::after { content:""; position:absolute; width: 3px; border-radius: 3px; background: inherit; }
+.silva-foe-antler::before { height: 56%; bottom: 31%; left: -12px; transform: rotate(-47deg); }
+.silva-foe-antler::after { height: 45%; bottom: 51%; left: 11px; transform: rotate(42deg); }
+.silva-foe-antler.left { transform: translateX(-46px) rotate(-26deg); }
+.silva-foe-antler.right { transform: translateX(42px) rotate(26deg) scaleX(-1); }
+.silva-foe-cloak { position:absolute; inset: 20% 8% 0; z-index: 2; clip-path: polygon(49% 1%, 65% 9%, 70% 23%, 87% 34%, 95% 73%, 99% 100%, 64% 90%, 48% 98%, 24% 90%, 0% 100%, 8% 68%, 15% 35%, 28% 24%, 34% 8%); background: radial-gradient(ellipse at 50% 12%, rgba(79, 92, 114, .75), transparent 33%), linear-gradient(115deg, #121c28 6%, #263746 43%, #0b121c 79%); box-shadow: inset 0 0 22px rgba(196, 225, 221, .19); }
+.silva-foe-face { position: absolute; top: 24%; left: 50%; z-index: 3; transform: translateX(-50%); width: 35%; height: 31%; border-radius: 44% 44% 45% 45%; background: radial-gradient(ellipse at 50% 55%, #182d3a, #0c151f 70%); border-top: 2px solid rgba(147, 179, 186, .20); }
+.silva-foe-eyes { position: absolute; left: 50%; top: 40%; z-index: 4; width: 25%; height: 8px; transform: translateX(-50%); background: radial-gradient(circle at 21% 50%, #e3c9f5 0 3px, transparent 4px),radial-gradient(circle at 79% 50%, #e3c9f5 0 3px, transparent 4px); filter: drop-shadow(0 0 6px #c7a4e8); animation: silva-eye 4.2s ease-in-out infinite; }
+.silva-foe-ground { position: absolute; left: -18%; right: -18%; bottom: -5px; height: 27px; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, rgba(152, 181, 185, .28), transparent 68%); filter: blur(5px); }
+@keyframes silva-foe-float { 0%,100%{ transform: translateY(0) } 50% { transform: translateY(-7px) } }
+@keyframes silva-eye { 0%,100%{opacity:.67} 45%{opacity:1} }
+/* 扇形手牌：四張同時可見，原軍火庫按鈕的點擊、禁用和鍵盤操作不變。 */
+#battle .scb-hand-section { grid-area: hand; position: relative; min-width:0; margin: -7px 0 10px; padding: 4px 0 2px; }
+#battle .scb-hand-section::before { content: "YOUR HAND  ·  手中之牌"; display:block; color:#bddbc9; text-align:center; font:italic 14px "Cormorant Garamond", Georgia,serif; letter-spacing:.22em; margin-bottom:5px; }
+#battle .scb-hand {
+  display: flex; justify-content: center; align-items: flex-end; gap: 0;
+  overflow: visible; min-height: 211px; padding: 10px 0 4px;
+  scroll-snap-type: none;
+}
+#battle .scb-card {
+  --card-tilt: 0deg; --card-rise: 0px;
+  flex: 0 0 162px; width: 162px; min-width:0; min-height: 208px;
+  margin: 0 0 0 -25px; padding: 11px 12px 12px;
+  position: relative; z-index: 1; transform-origin: 50% 105%;
+  transform: translateY(var(--card-rise)) rotate(var(--card-tilt));
+  border-radius: 11px 11px 6px 6px;
+  box-shadow: inset 0 0 0 3px rgba(4, 15, 17, .87), inset 0 0 0 4px rgba(201, 230, 206, .22), 0 7px 22px rgba(0,0,0,.6);
+}
+#battle .scb-card:first-child { margin-left: 0; }
+#battle .scb-card:nth-child(1) { --card-tilt: -7deg; --card-rise: 9px; }
+#battle .scb-card:nth-child(2) { --card-tilt: -2deg; --card-rise: 0px; z-index: 2; }
+#battle .scb-card:nth-child(3) { --card-tilt: 2deg; --card-rise: 0px; z-index: 3; }
+#battle .scb-card:nth-child(4) { --card-tilt: 7deg; --card-rise: 9px; z-index: 4; }
+#battle .scb-card:not(:disabled):hover,
+#battle .scb-card:not(:disabled):focus-visible {
+  --card-tilt: 0deg; --card-rise: -20px;
+  z-index: 20; border-color: #e5f9e5;
+  box-shadow: 0 12px 34px rgba(0,0,0,.75),0 0 20px var(--kind-glow);
+}
+#battle .scb-card:disabled { opacity: .62; filter: saturate(.75); }
+#battle .scb-card .silva-card-art { flex: 1 0 60px; min-height: 60px; }
+#battle .scb-card .silva-card-art > span { font-size: 41px; }
+#battle .scb-card .scb-card-name { font-size: 15px; }
+#battle .scb-card .scb-card-description { font-size: 11px; line-height: 1.5; }
+/* 玩家是靠近底部操作列的 HUD，而非場中第二個卡牌框。 */
+#battle .scb-player-panel {
+  grid-area: player; display:grid; grid-template-columns: 55px minmax(0,1fr);
+  grid-template-areas: "avatar name" "avatar hp" "avatar bar";
+  grid-template-rows: auto auto auto; column-gap: 11px; row-gap: 1px;
+  min-width:0; width:100%; margin:0; padding: 8px 3px 4px 0;
+  border:0; background: none; box-shadow: none; align-items:center;
+}
+#battle .scb-player-panel .scb-visual { grid-area: avatar; min-height:0; margin:0; }
+#battle .scb-player-panel .silva-combat-symbol { width: 48px; height: 48px; }
+#battle .scb-player-panel .silva-combat-symbol-core { font-size: 27px; }
+#battle .scb-player-panel .scb-combatant-header { grid-area:name; display:flex; flex-wrap:wrap; justify-content: flex-start; align-items:baseline; gap:7px; }
+#battle .scb-player-panel .scb-name { font-size: 14px; }
+#battle .scb-player-panel .scb-stat-row { grid-area:hp; margin:0; font-size:11px; }
+#battle .scb-player-panel .scb-meter { grid-area:bar; height:6px; margin:0; }
+#battle .scb-resource-row {
+  grid-area:resources; display:flex; flex-direction:row; flex-wrap:wrap;
+  align-items:center; gap:8px 15px;
+  min-width:0; width:100%; margin:0; padding: 5px 2px 8px;
+  border:0; background:none;
+}
+#battle .scb-resource-row .scb-energy-block { flex: 1 1 120px; min-width:0; }
+#battle .scb-resource-row .scb-stat-row { font-size:11px; margin-bottom:3px; }
+#battle .scb-resource-row .scb-meter { height:5px; margin:0; }
+#battle .scb-piles { flex:0 1 auto; font-size: 10px; gap:9px; }
+#battle .scb-controls { grid-area:controls; display:grid; place-items:center; margin:0; padding:6px 0; }
+#battle .scb-end-turn { min-width:125px; min-height:48px; padding: 9px 14px; white-space:nowrap; }
+#battle .scb-status { grid-area:status; padding:9px 10px 0; margin:0; border-top:1px solid rgba(180,222,202,.15); }
+/* 有限的回饋保留在敵人與玩家本體上，不生成額外浮動資訊窗。 */
+#battle .scb-enemy-panel.card-impact { animation: card-stage-hit .45s ease; }
+@keyframes card-stage-hit { 0%,100% {filter:none;} 30%{filter:drop-shadow(0 0 24px rgba(211,119,136,.50));} }
+.card-burst--attack { animation: card-flash .63s ease-out; }
+/* 某些使用者只剩 1 張手牌時，不需要空白佔位。 */
+#battle .scb-hand:empty { min-height: 46px; }
+@media (max-width: 800px) {
+  .card-main { width: calc(100% - 30px); }
+  .card-stage-inner { padding: 0 14px 16px; }
+  #battle .scb-enemy-panel { min-height: 320px; }
+  #battle .scb-hand { min-height: 190px; }
+  #battle .scb-card { flex-basis: 148px; width:148px; min-height: 196px; margin-left:-34px; }
+}
+@media (max-width: 540px) {
+  .card-main { padding-top: 23px; }
+  .card-main .demo-breadcrumb { margin-bottom: 15px; }
+  .card-intro { padding: 0 4px 8px; gap: 0; }
+  .card-intro h1 { font-size: clamp(32px, 9vw, 43px); }
+  .card-intro .section-label { font-size:9px; }
+  .card-intro .fine-rule { margin: 8px 0; }
+  .card-intro .card-subtitle { font-size: 18px; margin-top: 4px!important; }
+  .card-intro-sigil { display:none; }
+  .card-lead { font-size:11px; line-height:1.55; }
+  .card-topline { gap: 8px; margin: 8px 0 10px; }
+  .card-mode { font-size:11px; }
+  .card-mode small { display:none; }
+  .card-action { padding:8px 13px; min-height:39px; }
+  .card-stage-heading { padding:10px 13px; }
+  .card-stage-heading p { margin:3px 0 0; font-size:10px; }
+  .card-stage-heading .card-stage-index { font-size:12px; }
+  .card-stage-heading h2 { font-size:15px; }
+  .card-stage-inner { padding:0 10px 13px; }
+  #battle .slowly-card-battle { gap:0 7px; grid-template-columns:minmax(0,1fr) 107px; }
+  #battle .scb-center { min-height:34px; padding:5px 0; }
+  #battle .scb-round { font-size:18px; }
+  #battle .scb-turn { font-size:10px; }
+  #battle .scb-enemy-panel { min-height: 261px; padding: 2px 4px 16px; }
+  .silva-foe { width: 166px; height: 182px; }
+  #battle .scb-enemy-panel .scb-combatant-header { gap:10px; margin:0 0 4px; }
+  #battle .scb-enemy-panel .scb-name { font-size:15px; }
+  #battle .scb-enemy-panel .scb-shield-label { font-size:10px; }
+  #battle .scb-enemy-panel .scb-stat-row,
+  #battle .scb-enemy-panel .scb-meter { width:min(270px,90%); }
+  #battle .scb-hand-section { margin: 0 0 8px; }
+  #battle .scb-hand-section::before { font-size:12px; margin-bottom:1px; }
+  #battle .scb-hand { display:flex; overflow: visible; min-height:162px; padding:9px 0 1px; }
+  #battle .scb-card { flex: 0 0 clamp(105px,30vw,125px); width:clamp(105px,30vw,125px); min-height:164px; margin-left:clamp(-46px,-12vw,-39px); padding:7px 7px 8px; gap:5px; }
+  #battle .scb-card .silva-card-art { flex: 1 0 42px; min-height:42px; }
+  #battle .scb-card .silva-card-art > span { font-size:28px; }
+  #battle .scb-card .scb-card-name { font-size:12px; letter-spacing:.03em; }
+  #battle .scb-card .scb-card-description { font-size:10px; line-height:1.25; }
+  .silva-card-cost { width:22px; height:22px; font-size:17px; }
+  .silva-card-family { font-size:9px; letter-spacing:0; }
+  #battle .scb-player-panel { grid-template-columns:39px minmax(0,1fr); gap:0 7px; padding:6px 0 4px; }
+  #battle .scb-player-panel .silva-combat-symbol { width:36px; height:36px; }
+  #battle .scb-player-panel .silva-combat-symbol-core { font-size:22px; }
+  #battle .scb-player-panel .scb-name { font-size:12px; }
+  #battle .scb-player-panel .scb-shield-label { font-size:10px; }
+  #battle .scb-player-panel .scb-stat-row { font-size:10px; }
+  #battle .scb-resource-row { padding:2px 0 7px; gap:3px 8px; }
+  #battle .scb-resource-row .scb-energy-block { flex-basis: 95px; }
+  #battle .scb-piles { font-size:9px; }
+  #battle .scb-end-turn { min-width:0; width:107px; min-height:62px; padding:7px 6px; font-size:11px; }
+  #battle .scb-status { font-size:11px; }
+}
+@media (max-width:360px) {
+  #battle .scb-card { flex-basis:105px; width:105px; margin-left:-45px; }
+  #battle .scb-card .scb-card-description { font-size:9px; }
+  #battle .scb-player-panel .scb-shield-label { font-size:9px; }
+  #battle .scb-end-turn { width:98px; }
+  #battle .slowly-card-battle { grid-template-columns: minmax(0,1fr) 98px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .silva-foe,.silva-foe-eyes { animation:none; }
+}
+/* 扇牌從右向左覆蓋，費用放左上方，確保每張牌的能量消耗可見。 */
+#battle .scb-card .silva-card-upper { flex-direction: row-reverse; }
+@media (max-width:540px) {
+  #battle .scb-card { flex-basis: clamp(104px,29vw,125px); width:clamp(104px,29vw,125px); }
+}
+@media (max-width:360px) {
+  #battle .scb-card { flex-basis: 99px; width:99px; margin-left:-45px; }
+}
+
+/* ===== 雙擊出牌：第一下選取抬起，第二下讓牌飛出 ===== */
+#battle .scb-hand-section .silva-selection-hint {
+  color: #d0e8dc;
+  font-size: clamp(10px, 1.8vw, 12px);
+  text-align: center;
+  letter-spacing: .055em;
+  line-height: 1.45;
+  min-height: 1.5em;
+  margin: 3px 0 7px;
+  text-shadow: 0 1px 10px #061d1d;
+}
+#battle .scb-card.silva-selected:not(:disabled) {
+  --card-tilt: 0deg;
+  --card-rise: -39px;
+  z-index: 35;
+  border-color: #def9e5;
+  box-shadow: 0 20px 40px rgba(0,0,0,.78),
+    0 0 0 2px rgba(171,237,199,.74),
+    0 0 22px rgba(96,225,183,.58),
+    inset 0 0 0 2px rgba(221,255,241,.18);
+  filter: brightness(1.09);
+}
+#battle .scb-card.silva-selected::after {
+  content: "✧ 已選取";
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border-radius: 99px;
+  padding: 2px 9px;
+  font: 11px/1.5 "Noto Serif TC",serif;
+  color: #e9fff1;
+  background: rgba(12,55,50,.92);
+  border: 1px solid rgba(165,236,206,.65);
+  text-shadow: 0 0 8px rgba(142,254,214,.65);
+  pointer-events: none;
+}
+#battle .scb-card.silva-launching { opacity: .24; }
+#battle.silva-card-busy .scb-card,
+#battle.silva-card-busy .scb-end-turn { pointer-events: none; }
+.silva-card-flight {
+  position: fixed !important;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none !important;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  border: 1px solid rgba(199,247,213,.85);
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(160deg,#183933,#091b22);
+  box-shadow: 0 0 35px rgba(145,235,199,.65), 0 20px 38px rgba(0,0,0,.7);
+}
+.silva-card-flare {
+  --flare: rgba(139,237,199,.76);
+  width: 75px; height:75px;
+  border: 2px solid var(--flare);
+  border-radius: 50%;
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 20px var(--flare), inset 0 0 15px var(--flare);
+}
+.silva-card-flare--attack { --flare: rgba(215,143,180,.78); }
+.silva-card-flare--heal { --flare: rgba(155,231,190,.86); }
+@media (max-width:540px) {
+  #battle .scb-card.silva-selected:not(:disabled) { --card-rise: -29px; }
+  #battle .scb-card.silva-selected::after { top:-23px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #battle .scb-card,
+  #battle .scb-card.silva-selected { transition: none !important; }
+  .silva-card-flight, .silva-card-flare { display: none !important; }
+}

@@ -48,7 +48,21 @@
     container.appendChild(emblem);
   }
   function renderPlayer(container) { makeVisual(container, "player"); }
-  function renderEnemy(container) { makeVisual(container, "enemy"); }
+  // Boss 的原型採用宿主 CSS 程式美術：沒有「卡牌外框」，之後可換正式立繪。
+  function renderEnemy(container) {
+    container.replaceChildren();
+    const figure = document.createElement("div");
+    figure.className = "silva-foe";
+    figure.setAttribute("aria-hidden", "true");
+    ["halo", "antler left", "antler right", "cloak", "face", "eyes", "ground"].forEach((piece) => {
+      const part = document.createElement("span");
+      part.className = piece.startsWith("antler ")
+        ? `silva-foe-antler ${piece.split(" ")[1]}`
+        : `silva-foe-${piece}`;
+      figure.appendChild(part);
+    });
+    container.appendChild(figure);
+  }
 
   const kinds = {
     attack: "攻擊", guard: "守護", heal: "治癒", energy: "靈息", hybrid: "共鳴"
@@ -83,6 +97,83 @@
     desc.className = "scb-card-description";
     desc.textContent = card.description;
     button.append(upper, art, name, desc);
+  }
+
+  // 宿主視覺互動：選牌提示與飛牌純動畫，不處理戰鬥規則。
+  let selectionHint = null;
+  function installSelectionHint() {
+    const section = document.querySelector("#battle .scb-hand-section");
+    if (!section || selectionHint?.isConnected) return;
+    selectionHint = document.createElement("p");
+    selectionHint.className = "silva-selection-hint";
+    selectionHint.setAttribute("role", "status");
+    selectionHint.setAttribute("aria-live", "polite");
+    section.prepend(selectionHint);
+  }
+  function setHint(message) {
+    if (!selectionHint?.isConnected) installSelectionHint();
+    if (selectionHint) selectionHint.textContent = message;
+  }
+
+  const flights = new Set();
+  const waitAnimation = async (element, frames, options) => {
+    const animation = element.animate(frames, options);
+    try { await animation.finished; } catch (_) { /* canceled by navigation/restart */ }
+  };
+  async function flyCard(source, card) {
+    if (reduceMotion.matches || !source?.isConnected) return;
+    const attack = (card.effects || []).some(effect => effect.type === "attack");
+    const heal = (card.effects || []).some(effect => effect.type === "heal");
+    const kind = attack ? "attack" : heal ? "heal" : "guard";
+    const target = document.querySelector(attack
+      ? "#battle .scb-enemy-panel .scb-visual"
+      : "#battle .scb-player-panel .scb-visual");
+    if (!target) return;
+
+    const from = source.getBoundingClientRect();
+    const dest = target.getBoundingClientRect();
+    const dx = dest.left + dest.width / 2 - (from.left + from.width / 2);
+    const dy = dest.top + dest.height / 2 - (from.top + from.height / 2);
+    const copy = source.cloneNode(true);
+    copy.classList.remove("silva-selected");
+    copy.classList.add("silva-card-flight", `silva-card-flight--${kind}`);
+    copy.removeAttribute("aria-pressed");
+    copy.setAttribute("aria-hidden", "true");
+    copy.tabIndex = -1;
+    copy.disabled = true;
+    Object.assign(copy.style, {
+      left: `${from.left}px`, top: `${from.top}px`, width: `${from.width}px`,
+      height: `${from.height}px`, minHeight: "0", margin: "0", transform: "none"
+    });
+    document.body.append(copy);
+    flights.add(copy);
+    source.classList.add("silva-launching");
+    try {
+      await waitAnimation(copy, [
+        { transform: "translate(0px,0px) rotate(0deg) scale(1)", opacity: 1, offset: 0 },
+        { transform: `translate(${dx * .42}px,${dy * .41 - 38}px) rotate(-7deg) scale(.86)`, opacity: 1, offset: .5 },
+        { transform: `translate(${dx}px,${dy}px) rotate(9deg) scale(.24)`, opacity: 0, offset: 1 }
+      ], { duration: 520, easing: "cubic-bezier(.22,.67,.3,1)", fill: "forwards" });
+      impact(dest, kind);
+    } finally {
+      flights.delete(copy);
+      copy.remove();
+      source.classList.remove("silva-launching");
+    }
+  }
+  function impact(rect, kind) {
+    if (reduceMotion.matches) return;
+    const flare = document.createElement("span");
+    flare.className = `silva-card-flare silva-card-flare--${kind}`;
+    flare.setAttribute("aria-hidden", "true");
+    flare.style.left = `${rect.left + rect.width / 2}px`;
+    flare.style.top = `${rect.top + rect.height / 2}px`;
+    document.body.appendChild(flare);
+    void waitAnimation(flare, [
+      { transform: "translate(-50%,-50%) scale(.3)", opacity: 0 },
+      { transform: "translate(-50%,-50%) scale(.95)", opacity: .82, offset: .32 },
+      { transform: "translate(-50%,-50%) scale(1.65)", opacity: 0 }
+    ], { duration: 460, easing: "ease-out", fill: "forwards" }).finally(() => flare.remove());
   }
 
   let effectTimeout = 0;
@@ -124,9 +215,14 @@
     if (stage) stage.removeAttribute("data-result");
   }
 
-  window.SilvarainCardUI = Object.freeze({ renderPlayer, renderEnemy, renderCard, cardPlayed, enemyActed, finished, started });
+  window.SilvarainCardUI = Object.freeze({
+    renderPlayer, renderEnemy, renderCard, cardPlayed, enemyActed, finished, started,
+    installSelectionHint, setHint, flyCard
+  });
   addEventListener("pagehide", () => {
     clearTimeout(effectTimeout);
+    flights.forEach(node => node.remove());
+    flights.clear();
     instances.forEach(instance => { try { instance.destroy(); } catch (_) { /* already destroyed */ } });
   }, { once: true });
 })();
