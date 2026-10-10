@@ -153,3 +153,7 @@
     linear-gradient(135deg, rgba(19, 33, 38, .94), rgba(13, 28, 32, .88));
 }
 .demo-category--suika .demo-category-label { color: #d5c3eb; }
+
+/* 第四款：雨律 Rhythm。 */
+.demo-category--rhythm{background:radial-gradient(circle at 80% 16%,rgba(130,225,192,.2),transparent 48%),linear-gradient(137deg,rgba(13,41,38,.96),rgba(8,29,38,.9));}
+.demo-category--rhythm .demo-category-label{color:#b9e9d0;}
