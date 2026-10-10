@@ -1,0 +1,77 @@
+/* 鹿雨森 Story｜視覺外觀，可替換成美術團隊正式立繪及背景。 */
+:root {
+  color-scheme: dark;
+  --bg: #071719;
+  --panel: rgba(12, 33, 35, 0.83);
+  --panel-2: rgba(17, 45, 45, 0.73);
+  --ink: #e7f1eb;
+  --muted: #a5bcb4;
+  --line: rgba(171, 220, 199, 0.23);
+  --accent: #b6e3cf;
+}
+body {
+  color: var(--ink);
+  font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+  background: radial-gradient(ellipse at 50% 10%, #1b4543 0%, #0c262a 48%, var(--bg) 90%);
+  line-height: 1.7;
+}
+.mist-haze {
+  pointer-events: none; position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 82% 34%, rgba(191,224,211,.08), transparent 46%),
+              radial-gradient(ellipse at 18% 70%, rgba(149,192,178,.09), transparent 53%);
+}
+.shell { position: relative; z-index: 1; }
+.header { border-bottom: 1px solid var(--line); }
+.eyebrow { color: var(--accent); font: italic 13px 'Cormorant Garamond', Georgia, serif; letter-spacing: .19em; margin: 0 0 6px; }
+h1 { font-size: clamp(23px, 4.3vw, 34px); font-weight: 500; letter-spacing: .1em; }
+.accent { color: var(--muted); font-size: .68em; letter-spacing: .06em; }
+h2 { font-size: clamp(20px, 4vw, 26px); font-weight: 500; margin: 0 0 4px; }
+.muted, .chapter-description { color: var(--muted); font-size: 13px; }
+p.muted { margin: 6px 0; }
+.quiet-button, .primary-button, .tab, .chapter-button, .section-button {
+  border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: var(--panel);
+  padding: 10px 14px; transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.quiet-button { flex-shrink: 0; background: transparent; color: var(--muted); }
+.primary-button { color: #071719; background: #b4dcca; border-color: #b4dcca; font-weight: 700; }
+.tab { padding: 10px 21px; }
+.tab.is-active { color: #06181b; background: var(--accent); border-color: var(--accent); }
+:is(.quiet-button,.primary-button,.tab,.chapter-button,.section-button):not(:disabled):hover {
+  border-color: var(--accent); transform: translateY(-1px);
+}
+:is(.quiet-button,.primary-button,.tab,.chapter-button,.section-button):focus-visible {
+  outline: 2px solid #e2faed; outline-offset: 3px;
+}
+:is(.chapter-button,.section-button):disabled { opacity: .5; }
+.catalog-head { margin-top: 24px; }
+.chapter-button { min-height: 72px; padding: 14px 18px; }
+.chapter-title { font-size: 16px; letter-spacing: .05em; }
+.chapter-description { margin-top: 3px; }
+.chapter-status { color: var(--muted); font-size: 12px; text-align: right; flex-shrink: 0; }
+.chapter-box { border: 1px solid transparent; }
+.chapter-box.is-expanded { border-color: var(--line); border-radius: 12px; padding: 5px; background: rgba(3,16,19,.27); }
+.section-list { padding-left: 12px; padding-right: 12px; }
+.section-button { background: var(--panel-2); padding: 10px 13px; }
+.section-marker { width: 24px; display: inline-grid; place-items: center; color: var(--accent); }
+.reader-top { margin-top: 15px; }
+.reader-heading { color: var(--muted); font-size: 13px; }
+.stage { margin-top: 14px; border: 1px solid rgba(178,225,208,.12); border-radius: 12px 12px 0 0;
+  background: radial-gradient(ellipse at 50% 66%, rgba(143,213,184,.14), transparent 55%),
+              linear-gradient(to bottom, rgba(4,14,18,.4), rgba(17,43,43,.52)); }
+.stage-orbit { width: 130px; height: 130px; border: 1px solid rgba(173,229,204,.18); border-radius: 50%;
+  box-shadow: 0 0 80px rgba(146,211,192,.1), inset 0 0 35px rgba(147,213,195,.07);
+  position: relative; }
+.stage-orbit::before, .stage-orbit::after { content: ''; position: absolute; border: 1px solid rgba(167,222,201,.17); border-radius: 50%; inset: 12px; }
+.stage-orbit::after { inset: 34px; }
+.dialogue { margin-top: -1px; padding: clamp(17px, 4vw, 30px); background: rgba(7,25,27,.91); border: 1px solid rgba(178,225,208,.22); border-radius: 0 0 12px 12px; box-shadow: 0 12px 25px rgba(0,0,0,.18); }
+.speaker { margin: 0 0 10px; min-height: 1.7em; color: var(--accent); font-size: 16px; font-weight: 700; }
+.story-text { font-size: clamp(16px, 3.9vw, 19px); line-height: 2.05; letter-spacing: .03em; }
+.story-choices { margin-top: 14px; }
+.story-choices button { background: var(--panel-2); color: var(--ink); border: 1px solid var(--line); padding: 12px 14px; border-radius: 8px; }
+.story-choices button:focus-visible { outline: 2px solid var(--accent); }
+.reader-footer { padding-top: 5px; }
+.notice { border: 1px solid #c3a87a; padding: 12px; color: #f0d9ad; border-radius: 8px; }
+.status { max-width: 650px; margin: 0 auto; gap: 12px; padding: 40px 12px; }
+.status-actions { margin-top: 12px; }
+.footnote { padding: 24px 0 calc(22px + env(safe-area-inset-bottom)); color: rgba(195,224,210,.48); font-size: 12px; letter-spacing: .16em; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: 0.01ms !important; } }

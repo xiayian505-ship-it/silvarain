@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071719">
+  <meta name="description" content="鹿雨森 Silvarain｜主線劇情與番外故事">
+  <title>鹿雨森｜故事紀錄</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+  <!-- 軍火庫：僅 HTTPS 絕對網址引用，不複製模組內容。 -->
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/ui/responsive.css">
+  <link rel="stylesheet" href="./story.css">
+  <link rel="stylesheet" href="./story_style.css">
+  <script src="https://lib.stillnessbyslowly.com/state/navigation/navigation.js" defer></script>
+  <script src="./story.js" defer></script>
+  <script src="./story_style.js" defer></script>
+</head>
+<body>
+  <div class="mist-haze" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="header">
+      <button type="button" id="backButton" class="quiet-button" aria-label="返回遊戲入口">← 遊戲入口</button>
+      <div class="brand">
+        <p class="eyebrow">SILVARAIN · STORY ARCHIVE</p>
+        <h1>鹿雨森<span class="accent">｜故事紀錄</span></h1>
+      </div>
+    </header>
+
+    <section id="catalogScreen" class="screen" aria-label="劇情目錄">
+      <div class="catalog-head">
+        <div>
+          <h2>迷霧中的篇章</h2>
+          <p class="muted">已解鎖的故事可以隨時重新閱讀。</p>
+        </div>
+        <button id="resumeButton" class="primary-button" type="button" hidden>繼續閱讀</button>
+      </div>
+      <nav class="story-tabs" aria-label="故事分類">
+        <button id="mainTab" class="tab is-active" type="button" aria-pressed="true">主線故事</button>
+        <button id="extrasTab" class="tab" type="button" aria-pressed="false">番外故事</button>
+      </nav>
+      <div id="catalogList" class="catalog-list" aria-live="polite"></div>
+    </section>
+
+    <section id="readerScreen" class="screen reader" hidden aria-label="閱讀劇情">
+      <div class="reader-top">
+        <button id="returnCatalog" class="quiet-button" type="button">← 故事目錄</button>
+        <span id="readerHeading" class="reader-heading"></span>
+      </div>
+      <div class="stage" aria-hidden="true"><div class="stage-orbit"></div></div>
+      <article class="dialogue" aria-live="polite">
+        <p id="speakerName" class="speaker"></p>
+        <div id="storyText" class="story-text"></div>
+        <div id="storyChoices" class="story-choices"></div>
+        <div class="reader-footer"><span id="readingPosition" class="muted"></span><button id="nextButton" class="primary-button" type="button">下一句 →</button></div>
+      </article>
+      <p id="readerNotice" class="notice" role="status" hidden></p>
+    </section>
+
+    <section id="statusScreen" class="screen status" hidden aria-live="polite">
+      <p class="eyebrow">STILLNESS BY SLOWLY</p>
+      <h2 id="statusTitle">讀取中</h2>
+      <p id="statusText" class="muted"></p>
+      <div class="status-actions">
+        <button id="statusNext" class="primary-button" type="button" hidden>下一節 →</button>
+        <button id="statusBack" class="quiet-button" type="button">返回故事目錄</button>
+      </div>
+    </section>
+    <footer class="footnote">鹿雨森的雨，不曾真正停過。</footer>
+  </main>
+</body>
+</html>

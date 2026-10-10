@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "main": [
+    {
+      "id": "prologue",
+      "title": "序章",
+      "sections": [
+        {
+          "id": "prologue",
+          "title": "序章",
+          "file": "prologue/prologue.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_01",
+      "title": "第一章｜有些相遇，從來都不是巧合",
+      "sections": [
+        {
+          "id": "01_01",
+          "title": "第一章第一節",
+          "file": "chapter_01/01_01.json",
+          "enabled": false
+        },
+        {
+          "id": "01_02",
+          "title": "第一章第二節",
+          "file": "chapter_01/01_02.json",
+          "enabled": false
+        },
+        {
+          "id": "01_03",
+          "title": "第一章第三節",
+          "file": "chapter_01/01_03.json",
+          "enabled": false
+        },
+        {
+          "id": "01_04",
+          "title": "第一章第四節",
+          "file": "chapter_01/01_04.json",
+          "enabled": false
+        },
+        {
+          "id": "01_05",
+          "title": "第一章第五節",
+          "file": "chapter_01/01_05.json",
+          "enabled": false
+        },
+        {
+          "id": "01_06",
+          "title": "第一章第六節",
+          "file": "chapter_01/01_06.json",
+          "enabled": false
+        },
+        {
+          "id": "01_07",
+          "title": "第一章第七節",
+          "file": "chapter_01/01_07.json",
+          "enabled": false
+        },
+        {
+          "id": "01_08",
+          "title": "第一章第八節",
+          "file": "chapter_01/01_08.json",
+          "enabled": false
+        },
+        {
+          "id": "01_09",
+          "title": "第一章第九節",
+          "file": "chapter_01/01_09.json",
+          "enabled": false
+        },
+        {
+          "id": "01_10",
+          "title": "第一章第十節",
+          "file": "chapter_01/01_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_02",
+      "title": "第二章",
+      "sections": [
+        {
+          "id": "02_01",
+          "title": "第二章第一節",
+          "file": "chapter_02/02_01.json",
+          "enabled": false
+        },
+        {
+          "id": "02_02",
+          "title": "第二章第二節",
+          "file": "chapter_02/02_02.json",
+          "enabled": false
+        },
+        {
+          "id": "02_03",
+          "title": "第二章第三節",
+          "file": "chapter_02/02_03.json",
+          "enabled": false
+        },
+        {
+          "id": "02_04",
+          "title": "第二章第四節",
+          "file": "chapter_02/02_04.json",
+          "enabled": false
+        },
+        {
+          "id": "02_05",
+          "title": "第二章第五節",
+          "file": "chapter_02/02_05.json",
+          "enabled": false
+        },
+        {
+          "id": "02_06",
+          "title": "第二章第六節",
+          "file": "chapter_02/02_06.json",
+          "enabled": false
+        },
+        {
+          "id": "02_07",
+          "title": "第二章第七節",
+          "file": "chapter_02/02_07.json",
+          "enabled": false
+        },
+        {
+          "id": "02_08",
+          "title": "第二章第八節",
+          "file": "chapter_02/02_08.json",
+          "enabled": false
+        },
+        {
+          "id": "02_09",
+          "title": "第二章第九節",
+          "file": "chapter_02/02_09.json",
+          "enabled": false
+        },
+        {
+          "id": "02_10",
+          "title": "第二章第十節",
+          "file": "chapter_02/02_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_03",
+      "title": "第三章",
+      "sections": [
+        {
+          "id": "03_01",
+          "title": "第三章第一節",
+          "file": "chapter_03/03_01.json",
+          "enabled": false
+        },
+        {
+          "id": "03_02",
+          "title": "第三章第二節",
+          "file": "chapter_03/03_02.json",
+          "enabled": false
+        },
+        {
+          "id": "03_03",
+          "title": "第三章第三節",
+          "file": "chapter_03/03_03.json",
+          "enabled": false
+        },
+        {
+          "id": "03_04",
+          "title": "第三章第四節",
+          "file": "chapter_03/03_04.json",
+          "enabled": false
+        },
+        {
+          "id": "03_05",
+          "title": "第三章第五節",
+          "file": "chapter_03/03_05.json",
+          "enabled": false
+        },
+        {
+          "id": "03_06",
+          "title": "第三章第六節",
+          "file": "chapter_03/03_06.json",
+          "enabled": false
+        },
+        {
+          "id": "03_07",
+          "title": "第三章第七節",
+          "file": "chapter_03/03_07.json",
+          "enabled": false
+        },
+        {
+          "id": "03_08",
+          "title": "第三章第八節",
+          "file": "chapter_03/03_08.json",
+          "enabled": false
+        },
+        {
+          "id": "03_09",
+          "title": "第三章第九節",
+          "file": "chapter_03/03_09.json",
+          "enabled": false
+        },
+        {
+          "id": "03_10",
+          "title": "第三章第十節",
+          "file": "chapter_03/03_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_04",
+      "title": "第四章",
+      "sections": [
+        {
+          "id": "04_01",
+          "title": "第四章第一節",
+          "file": "chapter_04/04_01.json",
+          "enabled": false
+        },
+        {
+          "id": "04_02",
+          "title": "第四章第二節",
+          "file": "chapter_04/04_02.json",
+          "enabled": false
+        },
+        {
+          "id": "04_03",
+          "title": "第四章第三節",
+          "file": "chapter_04/04_03.json",
+          "enabled": false
+        },
+        {
+          "id": "04_04",
+          "title": "第四章第四節",
+          "file": "chapter_04/04_04.json",
+          "enabled": false
+        },
+        {
+          "id": "04_05",
+          "title": "第四章第五節",
+          "file": "chapter_04/04_05.json",
+          "enabled": false
+        },
+        {
+          "id": "04_06",
+          "title": "第四章第六節",
+          "file": "chapter_04/04_06.json",
+          "enabled": false
+        },
+        {
+          "id": "04_07",
+          "title": "第四章第七節",
+          "file": "chapter_04/04_07.json",
+          "enabled": false
+        },
+        {
+          "id": "04_08",
+          "title": "第四章第八節",
+          "file": "chapter_04/04_08.json",
+          "enabled": false
+        },
+        {
+          "id": "04_09",
+          "title": "第四章第九節",
+          "file": "chapter_04/04_09.json",
+          "enabled": false
+        },
+        {
+          "id": "04_10",
+          "title": "第四章第十節",
+          "file": "chapter_04/04_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_05",
+      "title": "第五章",
+      "sections": [
+        {
+          "id": "05_01",
+          "title": "第五章第一節",
+          "file": "chapter_05/05_01.json",
+          "enabled": false
+        },
+        {
+          "id": "05_02",
+          "title": "第五章第二節",
+          "file": "chapter_05/05_02.json",
+          "enabled": false
+        },
+        {
+          "id": "05_03",
+          "title": "第五章第三節",
+          "file": "chapter_05/05_03.json",
+          "enabled": false
+        },
+        {
+          "id": "05_04",
+          "title": "第五章第四節",
+          "file": "chapter_05/05_04.json",
+          "enabled": false
+        },
+        {
+          "id": "05_05",
+          "title": "第五章第五節",
+          "file": "chapter_05/05_05.json",
+          "enabled": false
+        },
+        {
+          "id": "05_06",
+          "title": "第五章第六節",
+          "file": "chapter_05/05_06.json",
+          "enabled": false
+        },
+        {
+          "id": "05_07",
+          "title": "第五章第七節",
+          "file": "chapter_05/05_07.json",
+          "enabled": false
+        },
+        {
+          "id": "05_08",
+          "title": "第五章第八節",
+          "file": "chapter_05/05_08.json",
+          "enabled": false
+        },
+        {
+          "id": "05_09",
+          "title": "第五章第九節",
+          "file": "chapter_05/05_09.json",
+          "enabled": false
+        },
+        {
+          "id": "05_10",
+          "title": "第五章第十節",
+          "file": "chapter_05/05_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_06",
+      "title": "第六章",
+      "sections": [
+        {
+          "id": "06_01",
+          "title": "第六章第一節",
+          "file": "chapter_06/06_01.json",
+          "enabled": false
+        },
+        {
+          "id": "06_02",
+          "title": "第六章第二節",
+          "file": "chapter_06/06_02.json",
+          "enabled": false
+        },
+        {
+          "id": "06_03",
+          "title": "第六章第三節",
+          "file": "chapter_06/06_03.json",
+          "enabled": false
+        },
+        {
+          "id": "06_04",
+          "title": "第六章第四節",
+          "file": "chapter_06/06_04.json",
+          "enabled": false
+        },
+        {
+          "id": "06_05",
+          "title": "第六章第五節",
+          "file": "chapter_06/06_05.json",
+          "enabled": false
+        },
+        {
+          "id": "06_06",
+          "title": "第六章第六節",
+          "file": "chapter_06/06_06.json",
+          "enabled": false
+        },
+        {
+          "id": "06_07",
+          "title": "第六章第七節",
+          "file": "chapter_06/06_07.json",
+          "enabled": false
+        },
+        {
+          "id": "06_08",
+          "title": "第六章第八節",
+          "file": "chapter_06/06_08.json",
+          "enabled": false
+        },
+        {
+          "id": "06_09",
+          "title": "第六章第九節",
+          "file": "chapter_06/06_09.json",
+          "enabled": false
+        },
+        {
+          "id": "06_10",
+          "title": "第六章第十節",
+          "file": "chapter_06/06_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_07",
+      "title": "第七章",
+      "sections": [
+        {
+          "id": "07_01",
+          "title": "第七章第一節",
+          "file": "chapter_07/07_01.json",
+          "enabled": false
+        },
+        {
+          "id": "07_02",
+          "title": "第七章第二節",
+          "file": "chapter_07/07_02.json",
+          "enabled": false
+        },
+        {
+          "id": "07_03",
+          "title": "第七章第三節",
+          "file": "chapter_07/07_03.json",
+          "enabled": false
+        },
+        {
+          "id": "07_04",
+          "title": "第七章第四節",
+          "file": "chapter_07/07_04.json",
+          "enabled": false
+        },
+        {
+          "id": "07_05",
+          "title": "第七章第五節",
+          "file": "chapter_07/07_05.json",
+          "enabled": false
+        },
+        {
+          "id": "07_06",
+          "title": "第七章第六節",
+          "file": "chapter_07/07_06.json",
+          "enabled": false
+        },
+        {
+          "id": "07_07",
+          "title": "第七章第七節",
+          "file": "chapter_07/07_07.json",
+          "enabled": false
+        },
+        {
+          "id": "07_08",
+          "title": "第七章第八節",
+          "file": "chapter_07/07_08.json",
+          "enabled": false
+        },
+        {
+          "id": "07_09",
+          "title": "第七章第九節",
+          "file": "chapter_07/07_09.json",
+          "enabled": false
+        },
+        {
+          "id": "07_10",
+          "title": "第七章第十節",
+          "file": "chapter_07/07_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_08",
+      "title": "第八章",
+      "sections": [
+        {
+          "id": "08_01",
+          "title": "第八章第一節",
+          "file": "chapter_08/08_01.json",
+          "enabled": false
+        },
+        {
+          "id": "08_02",
+          "title": "第八章第二節",
+          "file": "chapter_08/08_02.json",
+          "enabled": false
+        },
+        {
+          "id": "08_03",
+          "title": "第八章第三節",
+          "file": "chapter_08/08_03.json",
+          "enabled": false
+        },
+        {
+          "id": "08_04",
+          "title": "第八章第四節",
+          "file": "chapter_08/08_04.json",
+          "enabled": false
+        },
+        {
+          "id": "08_05",
+          "title": "第八章第五節",
+          "file": "chapter_08/08_05.json",
+          "enabled": false
+        },
+        {
+          "id": "08_06",
+          "title": "第八章第六節",
+          "file": "chapter_08/08_06.json",
+          "enabled": false
+        },
+        {
+          "id": "08_07",
+          "title": "第八章第七節",
+          "file": "chapter_08/08_07.json",
+          "enabled": false
+        },
+        {
+          "id": "08_08",
+          "title": "第八章第八節",
+          "file": "chapter_08/08_08.json",
+          "enabled": false
+        },
+        {
+          "id": "08_09",
+          "title": "第八章第九節",
+          "file": "chapter_08/08_09.json",
+          "enabled": false
+        },
+        {
+          "id": "08_10",
+          "title": "第八章第十節",
+          "file": "chapter_08/08_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_09",
+      "title": "第九章",
+      "sections": [
+        {
+          "id": "09_01",
+          "title": "第九章第一節",
+          "file": "chapter_09/09_01.json",
+          "enabled": false
+        },
+        {
+          "id": "09_02",
+          "title": "第九章第二節",
+          "file": "chapter_09/09_02.json",
+          "enabled": false
+        },
+        {
+          "id": "09_03",
+          "title": "第九章第三節",
+          "file": "chapter_09/09_03.json",
+          "enabled": false
+        },
+        {
+          "id": "09_04",
+          "title": "第九章第四節",
+          "file": "chapter_09/09_04.json",
+          "enabled": false
+        },
+        {
+          "id": "09_05",
+          "title": "第九章第五節",
+          "file": "chapter_09/09_05.json",
+          "enabled": false
+        },
+        {
+          "id": "09_06",
+          "title": "第九章第六節",
+          "file": "chapter_09/09_06.json",
+          "enabled": false
+        },
+        {
+          "id": "09_07",
+          "title": "第九章第七節",
+          "file": "chapter_09/09_07.json",
+          "enabled": false
+        },
+        {
+          "id": "09_08",
+          "title": "第九章第八節",
+          "file": "chapter_09/09_08.json",
+          "enabled": false
+        },
+        {
+          "id": "09_09",
+          "title": "第九章第九節",
+          "file": "chapter_09/09_09.json",
+          "enabled": false
+        },
+        {
+          "id": "09_10",
+          "title": "第九章第十節",
+          "file": "chapter_09/09_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "chapter_10",
+      "title": "第十章",
+      "sections": [
+        {
+          "id": "10_01",
+          "title": "第十章第一節",
+          "file": "chapter_10/10_01.json",
+          "enabled": false
+        },
+        {
+          "id": "10_02",
+          "title": "第十章第二節",
+          "file": "chapter_10/10_02.json",
+          "enabled": false
+        },
+        {
+          "id": "10_03",
+          "title": "第十章第三節",
+          "file": "chapter_10/10_03.json",
+          "enabled": false
+        },
+        {
+          "id": "10_04",
+          "title": "第十章第四節",
+          "file": "chapter_10/10_04.json",
+          "enabled": false
+        },
+        {
+          "id": "10_05",
+          "title": "第十章第五節",
+          "file": "chapter_10/10_05.json",
+          "enabled": false
+        },
+        {
+          "id": "10_06",
+          "title": "第十章第六節",
+          "file": "chapter_10/10_06.json",
+          "enabled": false
+        },
+        {
+          "id": "10_07",
+          "title": "第十章第七節",
+          "file": "chapter_10/10_07.json",
+          "enabled": false
+        },
+        {
+          "id": "10_08",
+          "title": "第十章第八節",
+          "file": "chapter_10/10_08.json",
+          "enabled": false
+        },
+        {
+          "id": "10_09",
+          "title": "第十章第九節",
+          "file": "chapter_10/10_09.json",
+          "enabled": false
+        },
+        {
+          "id": "10_10",
+          "title": "第十章第十節",
+          "file": "chapter_10/10_10.json",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "epilogue",
+      "title": "尾聲",
+      "sections": [
+        {
+          "id": "epilogue",
+          "title": "尾聲",
+          "file": "epilogue/epilogue.json",
+          "enabled": false
+        }
+      ]
+    }
+  ],
+  "extras": [
+    {
+      "id": "extra_01",
+      "title": "番外1",
+      "file": "extras/extra_01.json",
+      "enabled": false,
+      "unlockAfter": null
+    },
+    {
+      "id": "extra_02",
+      "title": "番外2",
+      "file": "extras/extra_02.json",
+      "enabled": false,
+      "unlockAfter": null
+    }
+  ]
+}
