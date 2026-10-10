@@ -1,10 +1,4 @@
-/* ==========================================================
- * 鹿雨森｜官網視覺底層
- *
- * 只管理：Canvas 森林、雨幕、霧、背景氣氛。
- * 導覽、文字、按鈕、版面請修改 index_style.css。
- * ========================================================== */
-
+/* 鹿雨森官網｜宿主森林舞台。繪圖由軍火庫 JS 完成，樣式只由宿主決定。 */
 :root {
   --night: #071213;
   --mist: #dfefe9;
@@ -18,6 +12,9 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(190, 226, 215, 0.18), transparent 60%),
+    linear-gradient(180deg, #071415 0%, #1a3735 55%, #071717 100%);
 }
 
 .scenery canvas {
@@ -29,62 +26,16 @@
   pointer-events: none;
 }
 
-#forest {
-  z-index: 0;
-}
-
-#weather {
-  z-index: 1;
-}
+#forest { z-index: 0; }
+#fog { z-index: 1; }
+#fireflies { z-index: 2; }
+#weather { z-index: 3; }
 
 .atmosphere {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 4;
   background:
-    radial-gradient(
-      ellipse at 50% 40%,
-      transparent 18%,
-      rgba(3, 11, 12, 0.54) 95%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(5, 16, 18, 0.2),
-      rgba(5, 16, 18, 0.45)
-    );
-}
-
-.mist {
-  position: absolute;
-  z-index: 2;
-  width: 85vw;
-  height: 40vh;
-  border-radius: 50%;
-  background: rgba(131, 179, 168, 0.07);
-  filter: blur(55px);
-  animation: mist-drift 22s ease-in-out infinite alternate;
-}
-
-.mist--left {
-  left: -30vw;
-  top: 24vh;
-}
-
-.mist--right {
-  right: -28vw;
-  bottom: 8vh;
-  animation-duration: 29s;
-  animation-direction: alternate-reverse;
-}
-
-@keyframes mist-drift {
-  to {
-    transform: translate(34vw, -3vh);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mist {
-    animation: none;
-  }
+    radial-gradient(ellipse at 50% 40%, transparent 18%, rgba(3, 11, 12, 0.54) 95%),
+    linear-gradient(180deg, rgba(5, 16, 18, 0.2), rgba(5, 16, 18, 0.45));
 }

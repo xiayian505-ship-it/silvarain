@@ -214,13 +214,7 @@ main,
 
 .hero-rule,
 .fine-rule {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(146, 225, 197, 0.7),
-    transparent
-  );
+  --sl-divider-color: rgba(146, 225, 197, 0.7);
 }
 
 .hero-rule {
@@ -566,18 +560,14 @@ main,
   color: white;
 }
 
-/* ---------- 捲動入場（JS 啟用才套用） ---------- */
-
-.has-reveal [data-reveal] {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+/* 入場動畫由軍火庫 fade_up.css 執行，宿主只設定速度。 */
+.slowly-fade-up {
+  --slowly-reveal-y: 16px;
+  --slowly-reveal-speed: 0.9s;
 }
 
-.has-reveal [data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* 按鈕掃光的外觀參數仍屬宿主。 */
+.sbs-shine { --sbs-shine-color: rgba(200, 240, 228, 0.19); }
 
 /* ---------- 手機與窄螢幕 ---------- */
 
@@ -714,11 +704,6 @@ main,
     stroke-dashoffset: 0;
   }
 
-  .has-reveal [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 
   .nav-cta,
   .button {

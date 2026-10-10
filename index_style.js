@@ -1,43 +1,20 @@
-/**
- * 鹿雨森｜官網 UI 互動
- *
- * 只負責內容的輕量入場動效。
- * 沒有 JavaScript 時，文字與按鈕也會正常顯示。
- */
-
+/** 鹿雨森官網 UI：透過慢慢軍火庫 Auto Reveal 管理入場觀察。 */
 (() => {
   "use strict";
 
-  const revealItems = document.querySelectorAll("[data-reveal]");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  if (!revealItems.length || prefersReducedMotion.matches) {
+  if (!window.SlowlyReveal?.create) {
+    console.warn("鹿雨森：Auto Reveal 尚未載入，內容保持可見。");
     return;
   }
 
-  // IntersectionObserver 不支援時，保留全部內容直接顯示。
-  if (!("IntersectionObserver" in window)) {
-    return;
-  }
-
-  // 只觀察首次進場。已經看過的內容不用反覆消失再出現。
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) {
-        continue;
-      }
-
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
-  }, {
+  const items = document.querySelectorAll("[data-reveal]");
+  items.forEach(item => item.classList.add("slowly-fade-up"));
+  const reveal = window.SlowlyReveal.create({
+    selector: "[data-reveal]",
+    className: "is-visible",
     threshold: 0.04,
-    rootMargin: "0px 0px 30px 0px"
+    rootMargin: "0px 0px 30px 0px",
+    once: true
   });
-
-  document.documentElement.classList.add("has-reveal");
-
-  for (const item of revealItems) {
-    observer.observe(item);
-  }
+  addEventListener("pagehide", () => reveal.destroy(), { once: true });
 })();

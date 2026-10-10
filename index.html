@@ -19,10 +19,20 @@
   >
 
   <!-- 視覺底層：森林、雨幕、霧氣 -->
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/ui/responsive.css">
   <link rel="stylesheet" href="./index.css">
   <!-- 網站版面：導覽、首頁、內容、響應式 -->
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/background/starfield.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/reveal/fade_up.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/light/button_shine.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/line/gradient_divider.css">
   <link rel="stylesheet" href="./index_style.css">
 
+  <script src="https://lib.stillnessbyslowly.com/effects/background/pine_forest.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/fog.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/rain.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/starfield.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/reveal/auto_reveal.js" defer></script>
   <script src="./index.js" defer></script>
   <script src="./index_style.js" defer></script>
 </head>
@@ -30,10 +40,14 @@
   <!-- 背景特效，不參與頁面操作 -->
   <div class="scenery" aria-hidden="true">
     <canvas id="forest"></canvas>
+    <canvas id="fog"></canvas>
+    <!-- 軍火庫星點效果：暫代官網的遠景螢光點。 -->
+    <div id="fireflies" class="sbs-stars" data-count="22" data-color="#c9ffd5">
+      <canvas></canvas>
+    </div>
     <canvas id="weather"></canvas>
     <div class="atmosphere"></div>
-    <div class="mist mist--left"></div>
-    <div class="mist mist--right"></div>
+    
   </div>
 
   <!-- 網站導覽 -->
@@ -60,7 +74,7 @@
       <nav class="nav-links" aria-label="網站導覽">
         <a class="nav-text" href="#about">關於作品</a>
         <a class="nav-text" href="#news">森林近況</a>
-        <a class="nav-cta" href="./game/">進入遊戲入口 ↗</a>
+        <a class="nav-cta sbs-shine" href="./game/">進入遊戲入口 ↗</a>
       </nav>
     </div>
   </header>
@@ -87,13 +101,13 @@
 
       <h1 id="site-title" data-reveal>鹿雨森</h1>
       <p class="subtitle" data-reveal>Silvarain: Silent Antler of Silvarain</p>
-      <div class="hero-rule" aria-hidden="true"></div>
+      <div class="hero-rule slowly-gradient-divider" aria-hidden="true"></div>
       <p class="hero-quote" data-reveal>在霧未散去的地方，仍保留著某些聲音</p>
       <p class="hero-note" data-reveal>故事與森林，都還在慢慢生長。</p>
 
       <div class="hero-actions" data-reveal>
-        <a class="button" href="#about">認識鹿雨森 <span aria-hidden="true">↓</span></a>
-        <a class="button button--secondary" href="./game/">
+        <a class="button sbs-shine" href="#about">認識鹿雨森 <span aria-hidden="true">↓</span></a>
+        <a class="button button--secondary sbs-shine" href="./game/">
           走入霧中 <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -132,7 +146,7 @@
             雨尚未停，霧也尚未散去。踏入鹿雨森的入口畫面，
             聽見森林的第一場雨。
           </p>
-          <a class="button" href="./game/">前往森林入口 <span aria-hidden="true">↗</span></a>
+          <a class="button sbs-shine" href="./game/">前往森林入口 <span aria-hidden="true">↗</span></a>
         </div>
         <p class="game-notice">
           ※ 目前開放的是遊戲入口畫面，正式遊戲內容仍在準備中。
@@ -148,7 +162,7 @@
             鹿雨森正在重新整理網站與遊戲架構。官網先從這裡開始，
             未來會逐步補上更多內容。
           </p>
-          <div class="fine-rule" aria-hidden="true"></div>
+          <div class="fine-rule slowly-gradient-divider" aria-hidden="true"></div>
           <p>不急著把每個角落都填滿，讓這座森林慢慢長成它應有的樣子。</p>
         </div>
 

@@ -1,0 +1,81 @@
+/* 鹿雨森遊戲入口｜場景本體。畫布定位、疊層及顏色由宿主控制。 */
+:root {
+  --mist: #dbeae5;
+  --teal: 127, 209, 189;
+  --deep: #071213;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--deep);
+  overflow: hidden;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(205, 232, 220, 0.20), transparent 60%),
+    linear-gradient(#081315, #173433 55%, #0b1b1c);
+}
+
+.scene canvas {
+  position: absolute;
+  top: -4%;
+  left: -4%;
+  width: 108%;
+  height: 108%;
+  max-width: none;
+  pointer-events: none;
+  will-change: transform;
+}
+
+#back { z-index: 1; }
+#fog { z-index: 2; opacity: 0.85; }
+#front {
+  z-index: 3;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000);
+  mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000);
+}
+#rain { z-index: 4; }
+#particles { z-index: 5; }
+
+#flash {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse at 50% 15%, #e8fff7, #8fc9bb 45%, transparent 85%);
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 42%, rgba(2, 8, 9, 0.78) 100%);
+}
+
+#veil {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, #d3e9e2, #7fb0a5 75%);
+  transition: opacity 2s ease;
+}
+
+body.entering #veil { opacity: 1; }
+body.entering #fog { opacity: 1; }
+body.entering #rain { opacity: 1; }
+body.entering { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  #veil { transition: none; }
+}
