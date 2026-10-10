@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071213">
+  <meta name="description" content="鹿雨森卡牌玩法測試區，目前預留卡牌遊戲開發目錄。">
+  <title>卡牌 Demo｜鹿雨森 Silvarain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+  <!-- 軍火庫僅透過 HTTPS 絕對網址引用；美術外觀由鹿雨森自己決定。 -->
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/ui/responsive.css">
+  <link rel="stylesheet" href="../../index.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/background/starfield.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/reveal/fade_up.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/light/button_shine.css">
+  <link rel="stylesheet" href="https://lib.stillnessbyslowly.com/effects/line/gradient_divider.css">
+  <link rel="stylesheet" href="../../index_style.css">
+  <link rel="stylesheet" href="../../demo/demo_style.css">
+  <script src="https://lib.stillnessbyslowly.com/effects/background/pine_forest.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/fog.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/rain.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/background/starfield.js" defer></script>
+  <script src="https://lib.stillnessbyslowly.com/effects/reveal/auto_reveal.js" defer></script>
+  <script src="../../index.js" defer></script>
+  <script src="../../index_style.js" defer></script>
+</head>
+<body>
+  <div class="scenery" aria-hidden="true">
+    <canvas id="forest"></canvas>
+    <canvas id="fog"></canvas>
+    <div id="fireflies" class="sbs-stars" data-count="22" data-color="#c9ffd5"><canvas></canvas></div>
+    <canvas id="weather"></canvas>
+    <div class="atmosphere"></div>
+  </div>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="../../index.html" aria-label="鹿雨森，返回官網">
+        <svg class="brand-mark" viewBox="0 0 60 72" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M30 65C22 54 18 40 10 23M30 65C38 54 42 40 50 23M17 39L5 30M43 39L55 30M12 27L12 9M48 27L48 9M23 51L9 49M37 51L51 49"></path>
+        </svg>
+        <span class="brand-name"><span class="brand-zh">鹿雨森</span><span class="brand-en">Silvarain</span></span>
+      </a>
+      <nav class="nav-links" aria-label="網站導覽">
+        <a class="nav-cta nav-cta--demo sbs-shine" href="../../index.html">返回官網 ↗</a>
+        <a class="nav-cta sbs-shine" href="../../game/">進入遊戲 ↗</a>
+      </nav>
+    </div>
+  </header>
+  <main class="demo-main">
+    <nav class="demo-breadcrumb" aria-label="所在位置">
+      <a href="../../index.html">鹿雨森官網</a><span aria-hidden="true">/</span>
+      <a href="../">遊戲 Demo</a><span aria-hidden="true">/</span>
+      <span aria-current="page">卡牌</span>
+    </nav>
+
+    <section class="demo-hero" aria-labelledby="card-title" data-reveal>
+      <p class="section-label">Card Games / Experimental Area</p>
+      <h1 id="card-title">卡牌 Demo</h1>
+      <p>卡牌類型的玩法統一放在這個目錄。策略構築、攻防戰鬥、劇情收集都可以在這裡逐步測試，彼此不干擾。</p>
+      <div class="fine-rule slowly-gradient-divider" aria-hidden="true"></div>
+    </section>
+
+    <section class="demo-empty" aria-labelledby="empty-title" data-reveal>
+      <h2 id="empty-title">卡牌試玩準備中</h2>
+      <p>卡牌分類已建立，尚未放入可玩的版本。等第一款 Demo 完成，這裡就會成為卡牌玩法的入口。</p>
+      <a class="button button--secondary sbs-shine" href="../">返回 Demo 大廳 <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-name">Silvarain · 鹿雨森</p>
+        <p class="footer-small">遊戲 Demo｜開發中玩法實驗室</p>
+      </div>
+      <a class="footer-link" href="https://stillnessbyslowly.com/" target="_blank" rel="noopener noreferrer">慢 慢 | Stillness by Slowly ↗</a>
+    </div>
+  </footer>
+</body>
+</html>

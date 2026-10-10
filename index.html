@@ -74,7 +74,8 @@
       <nav class="nav-links" aria-label="網站導覽">
         <a class="nav-text" href="#about">關於作品</a>
         <a class="nav-text" href="#news">森林近況</a>
-        <a class="nav-cta sbs-shine" href="./game/">進入遊戲入口 ↗</a>
+        <a class="nav-cta sbs-shine" href="./game/">進入遊戲 ↗</a>
+        <a class="nav-cta nav-cta--demo sbs-shine" href="./demo/">遊戲 Demo ↗</a>
       </nav>
     </div>
   </header>
@@ -137,19 +138,34 @@
       </section>
 
       <!-- 遊戲入口 -->
-      <section class="section game-section" id="game" aria-labelledby="game-title">
-        <div class="game-panel" data-reveal>
-          <span class="panel-spark" aria-hidden="true"></span>
-          <p class="section-label">02 / Enter the Mist</p>
-          <h2 id="game-title">遊戲入口</h2>
-          <p>
-            雨尚未停，霧也尚未散去。踏入鹿雨森的入口畫面，
-            聽見森林的第一場雨。
-          </p>
-          <a class="button sbs-shine" href="./game/">前往森林入口 <span aria-hidden="true">↗</span></a>
+      <section class="section game-section" id="game" aria-label="正式遊戲與 Demo 入口">
+        <div class="game-entry-grid">
+          <!-- 正式遊戲入口：維持原有 /game/ 網址 -->
+          <div class="game-panel" data-reveal>
+            <span class="panel-spark" aria-hidden="true"></span>
+            <p class="section-label">02 / Enter the Mist</p>
+            <h2 id="game-title">遊戲入口</h2>
+            <p>
+              雨尚未停，霧也尚未散去。踏入鹿雨森的入口畫面，
+              聽見森林的第一場雨。
+            </p>
+            <a class="button sbs-shine" href="./game/">前往森林入口 <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <!-- 玩法實驗室：獨立於正式遊戲，不影響 /game/ -->
+          <div class="game-panel game-panel--demo" data-reveal>
+            <span class="panel-spark" aria-hidden="true"></span>
+            <p class="section-label">02 / Game Experiments</p>
+            <h2 id="demo-title">遊戲 Demo</h2>
+            <p>
+              鹿雨森的玩法實驗室。各種尚未定案的遊戲構想，
+              會在這裡逐一試作、開放體驗。
+            </p>
+            <a class="button button--secondary sbs-shine" href="./demo/">探索玩法實驗室 <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
         <p class="game-notice">
-          ※ 目前開放的是遊戲入口畫面，正式遊戲內容仍在準備中。
+          ※ 正式遊戲內容仍在準備中；Demo 為獨立的開發測試版本，不代表最終玩法。
         </p>
       </section>
 
@@ -169,8 +185,8 @@
         <aside class="status-detail" data-reveal>
           <h3>網站整理中</h3>
           <p>
-            目前可以從官網前往遊戲入口。故事、設定與其他頁面，
-            待內容完成後再陸續公開。
+            目前可以從官網前往遊戲入口及 Demo 玩法實驗室。
+            故事、設定與其他頁面，待內容完成後再陸續公開。
           </p>
         </aside>
       </section>

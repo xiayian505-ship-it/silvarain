@@ -137,6 +137,11 @@ main,
   letter-spacing: 0.14em;
 }
 
+.nav-cta--demo {
+  border-color: rgba(192, 226, 214, 0.3);
+  background: rgba(6, 22, 22, 0.36);
+}
+
 .nav-cta:hover,
 .button:hover {
   border-color: #aff2d6;
@@ -399,7 +404,13 @@ main,
   letter-spacing: 0.34em;
 }
 
-/* ---------- 遊戲入口 ---------- */
+/* ---------- 正式遊戲與 Demo 雙入口 ---------- */
+
+.game-entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
 
 .game-panel {
   position: relative;
@@ -407,8 +418,8 @@ main,
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  min-height: 365px;
-  padding: 54px 58px;
+  min-height: 380px;
+  padding: 45px 39px;
   overflow: hidden;
   border: 1px solid rgba(169, 224, 201, 0.3);
   background:
@@ -422,6 +433,17 @@ main,
       rgba(7, 25, 27, 0.88),
       rgba(20, 57, 54, 0.78)
     );
+}
+
+.game-panel--demo {
+  background:
+    radial-gradient(ellipse at 72% 35%, rgba(152, 187, 205, 0.13), transparent 42%),
+    linear-gradient(125deg, rgba(7, 24, 27, 0.88), rgba(29, 51, 55, 0.78));
+}
+
+.game-panel--demo .panel-spark {
+  background: #dfedf5;
+  box-shadow: 0 0 17px 7px rgba(164, 204, 226, 0.22);
 }
 
 .game-panel::before,
@@ -609,8 +631,14 @@ main,
   }
 
   .nav-cta {
-    padding: 10px 12px;
-    font-size: 12px;
+    padding: 10px 9px;
+    font-size: 11px;
+    letter-spacing: 0.035em;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    gap: 8px;
   }
 
   .hero {
@@ -668,8 +696,13 @@ main,
     min-height: 180px;
   }
 
+  .game-entry-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .game-panel {
-    min-height: 340px;
+    min-height: 310px;
     padding: 38px 27px;
   }
 
@@ -709,4 +742,19 @@ main,
   .button {
     transition: none;
   }
+}
+
+/* 雙入口在較窄的平板也改為上下排列，避免文字擠壓。 */
+@media (min-width: 701px) and (max-width: 870px) {
+  .game-entry-grid { grid-template-columns: 1fr; }
+  .game-panel { min-height: 310px; }
+}
+
+@media (max-width: 380px) {
+  .nav-shell { width: calc(100% - 22px); }
+  .brand-mark { width: 22px; }
+  .brand-zh { font-size: 14px; }
+  .brand-en { font-size: 12px; }
+  .nav-cta { padding: 9px 6px; font-size: 10px; }
+  .nav-links { gap: 5px; }
 }
